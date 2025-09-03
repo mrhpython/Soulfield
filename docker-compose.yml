@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  api:
+    build: .
+    image: soulfield-api:local
+    env_file:
+      - .env
+    environment:
+      # Allow offline runs if keys aren’t set
+      - DEV_NO_API=${DEV_NO_API:-1}
+      - PORT=8790
+    ports:
+      - "8790:8790"
+    command: ["node", "backend/index.cjs"]
+    restart: unless-stopped
+
+  mcp:
+    build: .
+    image: soulfield-api:local
+    depends_on:
+      - api
+    ports:
+      - "8791:8791"
+    command: ["node", "backend/mcp-server.cjs"]
+    restart: unless-stopped
+
