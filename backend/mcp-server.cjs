@@ -9,6 +9,19 @@ app.use(express.json());
 const ROOT = path.resolve(__dirname); // ~/soulfield
 const SAFE = ROOT;                     // restrict to project root
 
+// Basic denylist to avoid accidental secret exfiltration when MCP is exposed.
+const FORBIDDEN_DIRS = new Set([".git", ".ssh", "receipts"]);
+function isForbidden(relPath){
+  const rel = relPath.replace(/\\/g, "/");
+  if (!rel || rel === ".") return false;
+  // Block .env files anywhere
+  if (/(^|\/)\.env(\.|$)/.test(rel)) return true;
+  // Block specific directories anywhere in the path
+  const parts = rel.split("/");
+  if (parts.some(p => FORBIDDEN_DIRS.has(p))) return true;
+  return false;
+}
+
 function safePath(p){
   const abs = path.resolve(SAFE, p || ".");
   if (!abs.startsWith(SAFE)) throw new Error("path escapes SAFE root");
@@ -16,15 +29,24 @@ function safePath(p){
 }
 function listDir(p){
   const abs = safePath(p);
+  const baseRel = path.relative(SAFE, abs) || ".";
   const ents = fs.readdirSync(abs, { withFileTypes: true });
-  return ents.map(e => ({
-    name: e.name,
-    type: e.isDirectory() ? "dir" : e.isFile() ? "file" : "other",
-    size: e.isFile() ? (fs.statSync(path.join(abs, e.name)).size) : null,
-  }));
+  return ents
+    .filter(e => {
+      const rel = baseRel === "." ? e.name : path.posix.join(baseRel.replace(/\\/g,"/"), e.name);
+      // Hide forbidden entries from listing
+      return !isForbidden(rel);
+    })
+    .map(e => ({
+      name: e.name,
+      type: e.isDirectory() ? "dir" : e.isFile() ? "file" : "other",
+      size: e.isFile() ? (fs.statSync(path.join(abs, e.name)).size) : null,
+    }));
 }
 function readFile(p, maxBytes=131072){ // 128 KiB cap
   const abs = safePath(p);
+  const rel = path.relative(SAFE, abs).replace(/\\/g, "/");
+  if (isForbidden(rel)) throw new Error("access denied");
   const st = fs.statSync(abs);
   if (!st.isFile()) throw new Error("not a file");
   const cap = Math.min(st.size, maxBytes|0 || 0);
