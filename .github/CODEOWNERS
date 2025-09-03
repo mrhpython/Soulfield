@@ -1,0 +1,9 @@
+# Code owners control default reviewers and approvals.
+# Use GitHub teams or usernames. Example: @org/team-name
+
+* @mrhpython
+
+# Examples (uncomment and adjust as teams evolve):
+# backend/*   @mrhpython
+# agents/*    @mrhpython
+
