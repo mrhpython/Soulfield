@@ -1,0 +1,89 @@
+Soulfield OS — Snapshot (portable)
+
+Date: 2025-08-27
+Host: ~/soulfield (Ubuntu, Node v20.x)
+
+Services & Ports
+
+Core app (chat/coder API): systemd soulfield.service → http://127.0.0.1:8790
+
+MCP FS (read-only): systemd soulfield-mcp.service → http://127.0.0.1:8791
+
+Key Directories
+
+backend/
+
+agents/ → manager.cjs, handlers/{aiden,infranodus,jina,scraper}.cjs
+
+adapters/ → jina/index.cjs (rerank), others as stubs
+
+services/ → memory/memory-pinecone.cjs (✓ working)
+
+services/scraper/ → index.cjs (policy-first, allowlist)
+
+workspace/
+
+research/ → InfraNodus & Aiden outputs (research.md, keywords.json, plan.md…)
+
+data/ → infranodus/, scrapes/, index.json
+
+specs/ → executable specs (spec.md)
+
+docs/ → STATUS.md, recaps, policies, knowledge base
+
+knowledge/ → README.md, TruthLens.md
+
+.agent-os/ → legacy Agent-OS specs/runs (kept; some flows still write here)
+
+Agents & Adapters (wired)
+
+Aiden (Claude): planning/spec drafting via Anthropic API (model: claude-opus-4-1-20250805)
+
+InfraNodus (stub + import): gap analysis; JSON export importable to workspace/data/infranodus/exports/
+
+Jina: reranker working (jina-reranker-v1-base-en) from backend/adapters/jina/
+
+Scraper: compliant fetch to workspace/data/scrapes/*.jsonl (gov/allowlist first)
+
+Memory: Pinecone index (serverless) soulfield-memory (1536-dim, cosine)
+backend/services/memory/memory-pinecone.cjs supports:
+
+ensureIndex(), upsertDocs([{id,text,meta}]),
+
+query({text,topK}),
+
+deleteDoc(id) (single) / deleteDocs(ids) (bulk)
+
+CLI helpers you have
+
+sf dry / sf apply / sf log (coder pipeline)
+
+sf research "topic" → Aiden research to workspace/research/<id>/
+
+sf specify [research-id] → spec from latest research → workspace/specs/<id>/spec.md
+
+sf index → rebuild workspace/data/index.json
+
+(If any helper is missing, they can be re-appended to ~/bin/sf later.)
+
+Environment (critical)
+
+ANTHROPIC_API_KEY=…
+
+AIDEN_MODEL=claude-opus-4-1-20250805
+
+OPENAI_API_KEY=… (embeddings)
+
+PINECONE_API_KEY=…, PINECONE_INDEX=soulfield-memory, PINECONE_REGION=us-east-1, PINECONE_CLOUD=aws
+
+(optional) JINA_API_KEY=…
+
+Today’s Known-Good Checks
+
+✅ Pinecone: ensure → upsert (demo-1/demo-2) → query → delete works
+
+✅ Jina rerank endpoint returns results
+
+✅ Router/manager loads handlers; scraper URL extraction fixed
+
+✅ Research → Spec → Coder dry/apply loop works when spec is green

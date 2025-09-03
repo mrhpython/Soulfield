@@ -1,0 +1,13 @@
+/* Jina AI adapter (stub) */
+const TruthLens = require('../../truthlens.cjs');
+
+async function embed({ texts=[] }) {
+  // TODO: call Jina Embeddings
+  return apply({ ok:true, vectors: texts.map((t,i)=>({id:i, dim:3, vec:[0,0,0]})) });
+}
+async function search({ query }) {
+  // TODO: call Jina Reranker/Search
+  return apply({ ok:true, results:[{doc:"stub", score:0.0}] });
+}
+
+module.exports = { embed, search };

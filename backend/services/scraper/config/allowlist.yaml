@@ -1,0 +1,7 @@
+# One domain per line (no protocol). Subdomains are allowed implicitly via suffix match.
+# Example entries:
+#   gov.uk
+#   nhs.uk
+#   example.com
+
+example.com

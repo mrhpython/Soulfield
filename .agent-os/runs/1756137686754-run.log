@@ -1,0 +1,25 @@
+# run @ 2025-08-25T16:01:26.754Z  (cwd:/home/michael/soulfield)
+
+$ echo "=== UK Marketplace MVP Workspace Check ==="
+=== UK Marketplace MVP Workspace Check ===
+
+$ ls -la ./legal/
+ls: cannot access './legal/': No such file or directory
+
+$ head -n 5 ./requirements.txt
+head: cannot open './requirements.txt' for reading: No such file or directory
+
+$ head -n 5 ./maker-agreement-template.md
+head: cannot open './maker-agreement-template.md' for reading: No such file or directory
+
+$ head -n 5 ./.env.example
+head: cannot open './.env.example' for reading: No such file or directory
+
+$ head -n 3 ./config/stripe_uk.env
+head: cannot open './config/stripe_uk.env' for reading: No such file or directory
+
+$ head -n 5 ./public/index.html
+head: cannot open './public/index.html' for reading: No such file or directory
+
+$ head -n 3 ./inventory/*.json
+head: cannot open './inventory/*.json' for reading: No such file or directory

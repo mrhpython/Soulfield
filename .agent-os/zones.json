@@ -1,0 +1,17 @@
+{
+  "zones": {
+    "workspace": "./workspace/",
+    "agents": "./workspace/agents/",
+    "specs": "./.agent-os/specs/",
+    "product": "./workspace/product/",
+    "research": "./workspace/research/",
+    "knowledge": "./workspace/knowledge/",
+    "recaps": "./workspace/recaps/",
+    "logs": "./workspace/logs/",
+    "infra": "./workspace/infra/",
+    "docs": "./workspace/docs/",
+    "data": "./workspace/data/",
+    "memory": "./.agent-os/",
+    "runs": "./.agent-os/runs/"
+  }
+}

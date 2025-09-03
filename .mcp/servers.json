@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "servers": {
+    "@modelcontextprotocol/server-filesystem": {
+      "enabled": true,
+      "config": {
+        "roots": ["~/soulfield"],
+        "writable": false,          // 🔒 read‑only for safety
+        "followSymlinks": false
+      }
+    },
+    "@modelcontextprotocol/server-fetch": {
+      "enabled": true,
+      "config": {
+        "timeoutMs": 20000,
+        "maxBytes": 5242880
+      }
+    },
+    "@modelcontextprotocol/server-git": {
+      "enabled": true,
+      "config": {
+        "repoDir": "~/soulfield",
+        "allowWrite": false,        // 🔒 no writes yet
+        "defaultBranch": "main"
+      }
+    }
+  }
+}

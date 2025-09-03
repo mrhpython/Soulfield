@@ -1,0 +1,43 @@
+const fs = require("fs");
+const path = require("path");
+const registry = JSON.parse(fs.readFileSync(path.join(__dirname, "registry.json"), "utf8"));
+
+const handlers = {
+  aiden:      require("./handlers/aiden.cjs"),
+  infranodus: require("./handlers/infranodus.cjs"),
+  jina:       require("./handlers/jina.cjs"),
+  scraper:    require("./handlers/scraper.cjs")
+};
+
+function listAgents() {
+  return Object.entries(registry).map(([name, meta]) => ({ name, ...meta }));
+}
+
+async function run(name, input) {
+  if (!handlers[name]) throw new Error(`unknown agent: ${name}`);
+  return handlers[name].run(input);
+}
+
+async function autoRoute({ brief, context = {} }) {
+  // Ask Aiden to choose the best agent (falls back to keyword routing)
+  try {
+    const { askAiden } = require("../../tools/aiden.cjs");
+    const options = listAgents().map(a => `- ${a.name}: ${a.desc}`).join("\n");
+    const sys = "You are a router. Choose the SINGLE best agent by name.";
+    const user = `Brief:\n${brief}\n\nAgents:\n${options}\n\nReply ONLY with the agent name.`;
+    const out = await askAiden({ system: sys, messages:[{ role:"user", content:user }], maxTokens: 10 });
+    const name = (out || "").trim().toLowerCase().split(/\s/)[0];
+    if (handlers[name]) return run(name, { brief, context });
+  } catch (e) {
+    // fall through to keyword router
+  }
+
+  // Simple fallback
+  const b = (brief||"").toLowerCase();
+  if (b.includes("scrape") || b.includes("url")) return run("scraper", { url: context.url || "" , brief });
+  if (b.includes("search") || b.includes("rerank") || b.includes("rag")) return run("jina", { query: brief });
+  if (b.includes("gap") || b.includes("keyword") || b.includes("content")) return run("infranodus", { topic: brief, texts: context.texts || [] });
+  return run("aiden", { brief, context });
+}
+
+module.exports = { listAgents, run, autoRoute };

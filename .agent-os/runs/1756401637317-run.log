@@ -1,0 +1,87 @@
+# run @ 2025-08-28T17:20:37.317Z  (cwd:/home/michael/soulfield)
+
+$ echo "seed README-TODOs and HTML mockup"
+seed README-TODOs and HTML mockup
+
+$ printf '%s\n' ':root{--bg:#0f1115;--panel:#161a22;--rail:#0c0f14;--text:#e5e7eb;--muted:#9aa3b2;--green:#34d399;--accent:#4f46e5;--card:#1b2130;--border:#232a38}' \
+:root{--bg:#0f1115;--panel:#161a22;--rail:#0c0f14;--text:#e5e7eb;--muted:#9aa3b2;--green:#34d399;--accent:#4f46e5;--card:#1b2130;--border:#232a38}
+\
+
+$ printf '%s\n' \
+\
+
+$ printf '%s\n' \
+\
+
+$ mkdir -p /home/michael/soulfield/soulfield-gui/src/{shell,tabs,services,components,utils}
+
+$ mkdir -p /home/michael/soulfield/soulfield-gui/src/services/{api,state,storage}
+
+$ mkdir -p /home/michael/soulfield/soulfield-gui/src/tabs/{Projects,Sessions,Agents,Commands,Memory,Specs,Logs,Settings,MCP}
+
+$ printf '%s\n' '# Module Mini-Spec' '**Name:** shell' '**Purpose:** ' '**Users:** ' '**Success Criteria:** ' '' '## TODOs' '- [ ] define responsibilities' '- [ ] plan UI elements' '- [ ] link to backend routes (if needed)' '- [ ] write first draft spec' > /home/michael/soulfield/soulfield-gui/src/shell/README-TODO.md
+
+$ printf '%s\n' '# Module Mini-Spec' '**Name:** components' '**Purpose:** ' '**Users:** ' '**Success Criteria:** ' '' '## TODOs' '- [ ] define responsibilities' '- [ ] plan UI elements' '- [ ] link to backend routes (if needed)' '- [ ] write first draft spec' > /home/michael/soulfield/soulfield-gui/src/components/README-TODO.md
+
+$ printf '%s\n' '# Module Mini-Spec' '**Name:** services/api' '**Purpose:** ' '**Users:** ' '**Success Criteria:** ' '' '## TODOs' '- [ ] endpoints map' '- [ ] error handling' '- [ ] auth/local config' '- [ ] tests' > /home/michael/soulfield/soulfield-gui/src/services/api/README-TODO.md
+
+$ printf '%s\n' '# Module Mini-Spec' '**Name:** services/state' '**Purpose:** ' '**Users:** ' '**Success Criteria:** ' '' '## TODOs' '- [ ] atoms/selectors' '- [ ] persistence' '- [ ] error boundaries' '- [ ] tests' > /home/michael/soulfield/soulfield-gui/src/services/state/README-TODO.md
+
+$ printf '%s\n' '# Module Mini-Spec' '**Name:** services/storage' '**Purpose:** ' '**Users:** ' '**Success Criteria:** ' '' '## TODOs' '- [ ] keys/paths' '- [ ] migration' '- [ ] export/import' '- [ ] tests' > /home/michael/soulfield/soulfield-gui/src/services/storage/README-TODO.md
+
+$ printf '%s\n' '# Module Mini-Spec' '**Name:** utils' '**Purpose:** ' '**Users:** ' '**Success Criteria:** ' '' '## TODOs' '- [ ] constants' '- [ ] helpers' '- [ ] formatting' '- [ ] tests' > /home/michael/soulfield/soulfield-gui/src/utils/README-TODO.md
+
+$ printf '%s\n' '# Module Mini-Spec' '**Name:** Projects' '**Purpose:** ' '**Users:** ' '**Success Criteria:** ' '' '## TODOs' '- [ ] list projects' '- [ ] open/create' '- [ ] statuses' '- [ ] tests' > /home/michael/soulfield/soulfield-gui/src/tabs/Projects/README-TODO.md
+
+$ printf '%s\n' '# Module Mini-Spec' '**Name:** Sessions' '**Purpose:** ' '**Users:** ' '**Success Criteria:** ' '' '## TODOs' '- [ ] history list' '- [ ] time travel' '- [ ] branch' '- [ ] tests' > /home/michael/soulfield/soulfield-gui/src/tabs/Sessions/README-TODO.md
+
+$ printf '%s\n' '# Module Mini-Spec' '**Name:** Agents' '**Purpose:** ' '**Users:** ' '**Success Criteria:** ' '' '## TODOs' '- [ ] list/edit agents' '- [ ] prompt editor' '- [ ] save/validate' '- [ ] tests' > /home/michael/soulfield/soulfield-gui/src/tabs/Agents/README-TODO.md
+
+$ printf '%s\n' '# Module Mini-Spec' '**Name:** Commands' '**Purpose:** ' '**Users:** ' '**Success Criteria:** ' '' '## TODOs' '- [ ] presets' '- [ ] console I/O' '- [ ] result view' '- [ ] tests' > /home/michael/soulfield/soulfield-gui/src/tabs/Commands/README-TODO.md
+
+$ printf '%s\n' '# Module Mini-Spec' '**Name:** Memory' '**Purpose:** ' '**Users:** ' '**Success Criteria:** ' '' '## TODOs' '- [ ] search/filter' '- [ ] item view' '- [ ] enrich' '- [ ] tests' > /home/michael/soulfield/soulfield-gui/src/tabs/Memory/README-TODO.md
+
+$ printf '%s\n' '# Module Mini-Spec' '**Name:** Specs' '**Purpose:** ' '**Users:** ' '**Success Criteria:** ' '' '## TODOs' '- [ ] list/open spec.md' '- [ ] edit guard' '- [ ] dry/apply' '- [ ] tests' > /home/michael/soulfield/soulfield-gui/src/tabs/Specs/README-TODO.md
+
+$ printf '%s\n' '# Module Mini-Spec' '**Name:** Logs' '**Purpose:** ' '**Users:** ' '**Success Criteria:** ' '' '## TODOs' '- [ ] tail runs' '- [ ] filter' '- [ ] export' '- [ ] tests' > /home/michael/soulfield/soulfield-gui/src/tabs/Logs/README-TODO.md
+
+$ printf '%s\n' '# Module Mini-Spec' '**Name:** Settings' '**Purpose:** ' '**Users:** ' '**Success Criteria:** ' '' '## TODOs' '- [ ] local prefs' '- [ ] TruthLens flag' '- [ ] paths' '- [ ] tests' > /home/michael/soulfield/soulfield-gui/src/tabs/Settings/README-TODO.md
+
+$ printf '%s\n' '# Module Mini-Spec' '**Name:** MCP' '**Purpose:** ' '**Users:** ' '**Success Criteria:** ' '' '## TODOs' '- [ ] status view' '- [ ] tools list' '- [ ] errors' '- [ ] tests' > /home/michael/soulfield/soulfield-gui/src/tabs/MCP/README-TODO.md
+
+$ printf '%s\n' '<!doctype html>' '<html lang="en">' '<head>' '  <meta charset="utf-8" />' '  <meta name="viewport" content="width=device-width,initial-scale=1" />' '  <title>Soulfield OS GUI — Mock</title>' '  <link rel="stylesheet" href="styles.css" />' '</head>' '<body>' '  <div class="app">' '    <aside class="nav">' '      <div class="brand">Soulfield OS</div>' '      <ul class="menu">' '        <li class="active">Projects</li>' '        <li>Sessions</li>' '        <li>Agents</li>' '        <li>Commands</li>' '        <li>Memory</li>' '        <li>Specs</li>' '        <li>Logs</li>' '        <li>Settings</li>' '        <li>MCP</li>' '      </ul>' '    </aside>' '    <main class="content">' '      <header class="statusbar">' '        <span class="dot green"></span> Connected: 8790' '        <span class="badge">TruthLens: Active</span>' '      </header>' '      <section class="panel">' '        <div class="panel-head">' '          <h1>Projects</h1>' '          <button class="btn">+ New</button>' '        </div>' '        <div class="card-list">' '          <div class="card"><div class="title">my-app</div><div class="meta">3 sessions · last: 2h ago</div></div>' '          <div class="card"><div class="title">data-pipeline</div><div class="meta">8 sessions · last: 10m ago</div></div>' '        </div>' '      </section>' '    </main>' '  </div>' '</body>' '</html>' > /home/michael/soulfield/soulfield-gui/index.html
+
+$ printf '%s\n' ':root{--bg:#0f1115;--panel:#161a22;--rail:#0c0f14;--text:#e5e7eb;--muted:#9aa3b2;--green:#34d399;--accent:#4f46e5;--card:#1b2130;--border:#232a38}' '*{box-sizing:border-box}html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial}' 'body{background:var(--bg);color:var(--text)}' '.app{display:grid;grid-template-columns:240px 1fr;height:100vh}' '.nav{background:var(--rail);padding:16px;border-right:1px solid var(--border)}' '.brand{font-weight:700;margin-bottom:12px;letter-spacing:.4px}' '.menu{list-style:none;padding:0;margin:8px 0 0 0}' '.menu li{padding:10px 12px;border-radius:10px;color:var(--muted);cursor:default}' '.menu li.active{background:var(--panel);color:var(--text)}' '.content{display:flex;flex-direction:column}' '.statusbar{display:flex;gap:10px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--panel)}' '.dot{width:9px;height:9px;border-radius:50%;display:inline-block}' '.dot.green{background:var(--green)}' '.badge{margin-left:auto;background:#223;padding:6px 10px;border-radius:999px;color:#c7cff9;border:1px solid #334}' '.panel{padding:16px}' '.panel-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}' '.panel-head h1{margin:0;font-size:18px}' '.btn{margin-left:auto;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:8px 12px;cursor:default}' '.card-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}' '.card{background:var(--card);border:1px solid var(--border);padding:12px;border-radius:16px}' '.title{font-weight:600;margin-bottom:6px}' '.meta{color:var(--muted);font-size:12px}' > /home/michael/soulfield/soulfield-gui/styles.css
+
+$ ls -la /home/michael/soulfield/soulfield-gui
+total 20
+drwxrwxr-x  3 michael michael 4096 Aug 28 18:13 .
+drwxrwxr-x 17 michael michael 4096 Aug 28 16:10 ..
+-rw-rw-r--  1 michael michael 1290 Aug 28 18:20 index.html
+-rw-rw-r--  1 michael michael    0 Aug 28 16:21 README.md
+drwxrwxr-x  9 michael michael 4096 Aug 28 16:10 src
+-rw-rw-r--  1 michael michael 1612 Aug 28 18:20 styles.css
+
+$ head -n 12 /home/michael/soulfield/soulfield-gui/index.html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Soulfield OS GUI — Mock</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="nav">
+      <div class="brand">Soulfield OS</div>
+
+$ head -n 8 /home/michael/soulfield/soulfield-gui/styles.css
+:root{--bg:#0f1115;--panel:#161a22;--rail:#0c0f14;--text:#e5e7eb;--muted:#9aa3b2;--green:#34d399;--accent:#4f46e5;--card:#1b2130;--border:#232a38}
+*{box-sizing:border-box}html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
+body{background:var(--bg);color:var(--text)}
+.app{display:grid;grid-template-columns:240px 1fr;height:100vh}
+.nav{background:var(--rail);padding:16px;border-right:1px solid var(--border)}
+.brand{font-weight:700;margin-bottom:12px;letter-spacing:.4px}
+.menu{list-style:none;padding:0;margin:8px 0 0 0}
+.menu li{padding:10px 12px;border-radius:10px;color:var(--muted);cursor:default}

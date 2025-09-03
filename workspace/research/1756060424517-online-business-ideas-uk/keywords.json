@@ -1,0 +1,173 @@
+{
+  "schema": {
+    "keyword": "string",
+    "intent": "info|nav|comm|trans",
+    "difficulty": 1,
+    "volume_est": 1,
+    "cpc_est": 0,
+    "cluster": "string",
+    "priority": 1
+  },
+  "items": [
+    {
+      "keyword": "online business ideas uk",
+      "intent": "info",
+      "difficulty": 45,
+      "volume_est": 2400,
+      "cluster": "ideas",
+      "priority": 9
+    },
+    {
+      "keyword": "start online business uk",
+      "intent": "info",
+      "difficulty": 38,
+      "volume_est": 1900,
+      "cluster": "how-to",
+      "priority": 8
+    },
+    {
+      "keyword": "uk online business tax",
+      "intent": "info",
+      "difficulty": 42,
+      "volume_est": 880,
+      "cluster": "compliance",
+      "priority": 7
+    },
+    {
+      "keyword": "making tax digital software",
+      "intent": "trans",
+      "difficulty": 65,
+      "volume_est": 3400,
+      "cluster": "software",
+      "priority": 6
+    },
+    {
+      "keyword": "online tutoring platform uk",
+      "intent": "trans",
+      "difficulty": 58,
+      "volume_est": 720,
+      "cluster": "education",
+      "priority": 7
+    },
+    {
+      "keyword": "ir35 checker tool",
+      "intent": "trans",
+      "difficulty": 48,
+      "volume_est": 1100,
+      "cluster": "compliance",
+      "priority": 8
+    },
+    {
+      "keyword": "uk business ideas from home",
+      "intent": "info",
+      "difficulty": 35,
+      "volume_est": 2100,
+      "cluster": "ideas",
+      "priority": 9
+    },
+    {
+      "keyword": "online course platform uk",
+      "intent": "nav",
+      "difficulty": 52,
+      "volume_est": 590,
+      "cluster": "education",
+      "priority": 5
+    },
+    {
+      "keyword": "uk saas ideas",
+      "intent": "info",
+      "difficulty": 28,
+      "volume_est": 320,
+      "cluster": "ideas",
+      "priority": 6
+    },
+    {
+      "keyword": "digital products to sell uk",
+      "intent": "info",
+      "difficulty": 41,
+      "volume_est": 480,
+      "cluster": "products",
+      "priority": 7
+    },
+    {
+      "keyword": "uk freelance platform",
+      "intent": "nav",
+      "difficulty": 62,
+      "volume_est": 890,
+      "cluster": "marketplace",
+      "priority": 4
+    },
+    {
+      "keyword": "online business insurance uk",
+      "intent": "trans",
+      "difficulty": 71,
+      "volume_est": 1600,
+      "cluster": "compliance",
+      "priority": 3
+    },
+    {
+      "keyword": "vat registration online business",
+      "intent": "info",
+      "difficulty": 39,
+      "volume_est": 670,
+      "cluster": "compliance",
+      "priority": 8
+    },
+    {
+      "keyword": "uk membership site ideas",
+      "intent": "info",
+      "difficulty": 25,
+      "volume_est": 210,
+      "cluster": "ideas",
+      "priority": 7
+    },
+    {
+      "keyword": "online consulting business uk",
+      "intent": "info",
+      "difficulty": 33,
+      "volume_est": 390,
+      "cluster": "services",
+      "priority": 6
+    },
+    {
+      "keyword": "uk online marketplace",
+      "intent": "nav",
+      "difficulty": 68,
+      "volume_est": 2200,
+      "cluster": "marketplace",
+      "priority": 3
+    },
+    {
+      "keyword": "digital marketing agency uk",
+      "intent": "nav",
+      "difficulty": 74,
+      "volume_est": 4100,
+      "cluster": "services",
+      "priority": 2
+    },
+    {
+      "keyword": "online bookkeeping services uk",
+      "intent": "trans",
+      "difficulty": 61,
+      "volume_est": 1300,
+      "cluster": "services",
+      "priority": 5
+    },
+    {
+      "keyword": "uk subscription box ideas",
+      "intent": "info",
+      "difficulty": 44,
+      "volume_est": 560,
+      "cluster": "products",
+      "priority": 4
+    },
+    {
+      "keyword": "passive income uk online",
+      "intent": "info",
+      "difficulty": 37,
+      "volume_est": 980,
+      "cluster": "ideas",
+      "priority": 8
+    }
+  ]
+}

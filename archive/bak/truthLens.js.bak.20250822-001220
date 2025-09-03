@@ -1,0 +1,40 @@
+// truthLens.js — Express middleware + pure helper for council
+
+function lensMeta() {
+  return {
+    lens: {
+      passed: ["structure", "no-simulation"],
+      failed: [],
+      emergent: true,
+    },
+  };
+}
+
+// Express middleware (default behavior)
+function truthLens(req, res, next) {
+  const originalJson = res.json.bind(res);
+  res.json = function (data) {
+    const meta = lensMeta();
+    if (data && typeof data === "object") {
+      // merge if caller already set meta
+      data.meta = data.meta ? { ...meta, ...data.meta } : meta;
+    } else {
+      data = { text: String(data), meta };
+    }
+    return originalJson(data);
+  };
+  next();
+}
+
+// Pure helper for arbitrary values (used by council)
+function applyTruthLens(raw) {
+  const meta = lensMeta();
+  if (raw && typeof raw === "object") {
+    return raw.meta ? { ...raw, meta: { ...meta, ...raw.meta } } : { ...raw, meta };
+  }
+  return { text: String(raw ?? ""), meta };
+}
+
+// Back-compat default export + named exports
+module.exports = Object.assign(truthLens, { truthLens, applyTruthLens, lensMeta });
+

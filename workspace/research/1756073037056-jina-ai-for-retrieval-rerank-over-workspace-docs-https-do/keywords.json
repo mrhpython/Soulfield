@@ -1,0 +1,62 @@
+[
+  {
+    "keyword": "jina ai integration",
+    "intent": "technical",
+    "difficulty": "medium",
+    "volume_est": "500"
+  },
+  {
+    "keyword": "vector search api",
+    "intent": "implementation",
+    "difficulty": "high",
+    "volume_est": "1200"
+  },
+  {
+    "keyword": "document reranking",
+    "intent": "feature",
+    "difficulty": "medium",
+    "volume_est": "800"
+  },
+  {
+    "keyword": "rag pipeline setup",
+    "intent": "tutorial",
+    "difficulty": "high",
+    "volume_est": "2000"
+  },
+  {
+    "keyword": "embedding api comparison",
+    "intent": "research",
+    "difficulty": "low",
+    "volume_est": "1500"
+  },
+  {
+    "keyword": "semantic search backend",
+    "intent": "architecture",
+    "difficulty": "high",
+    "volume_est": "900"
+  },
+  {
+    "keyword": "truth verification ai",
+    "intent": "feature",
+    "difficulty": "medium",
+    "volume_est": "600"
+  },
+  {
+    "keyword": "workspace document indexing",
+    "intent": "solution",
+    "difficulty": "medium",
+    "volume_est": "400"
+  },
+  {
+    "keyword": "jina reader api",
+    "intent": "technical",
+    "difficulty": "low",
+    "volume_est": "300"
+  },
+  {
+    "keyword": "cross-encoder reranking",
+    "intent": "technical",
+    "difficulty": "high",
+    "volume_est": "700"
+  }
+]

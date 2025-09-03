@@ -1,0 +1,12 @@
+1) UI Architecture & File Map
+   - One-window layout (left nav or top tabs), primary panes, and component responsibilities.
+   - Proposed folders/files for the GUI project (e.g., app shell, tabs, services, state), with 1-line purpose each.
+2) Text Wireframes (ASCII)
+   - For each tab (Projects, Sessions, Agents, Commands, Memory, Specs, Logs, Settings, MCP):
+     * Layout zones (Header | Left Nav | Main | Right Pane).
+     * Key components (lists/tables/editors/charts/buttons).
+     * Primary actions (exact button labels).
+     * Empty/loading/error states + 3–4 keyboard shortcuts.
+3) API Contract (backend <-> GUI, localhost only)
+   - METHOD, PATH, request JSON, response JSON, error shape for:
+     * /api/research (topic)

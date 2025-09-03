@@ -1,0 +1,19 @@
+can_do:
+  - Sell goods/services online to UK consumers
+  - Offer subscriptions with clear pricing & easy cancellation
+  - Email marketing with explicit opt-in and unsubscribe
+  - Use Stripe UK with SCA/3DS2
+
+cannot_do:
+  - Hidden fees / drip pricing
+  - Dropshipping without UK-compliant returns & duties
+  - Collect personal data without privacy notice & consent
+  - Omit address/email from site imprint
+
+must_have:
+  - privacy_page: /privacy
+  - terms_page: /terms
+  - returns_page: /returns
+  - contact: address + email in footer
+  - payment: Stripe UK, SCA enabled
+  - vat: display number if registered

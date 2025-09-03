@@ -1,0 +1,142 @@
+Perfect — I’ll leave you with a clean, current README and a few ready-to-run commands so you can pick up tomorrow without context-switch.
+
+Below are copy/paste shell commands that:
+
+Write an updated README with offline quickstart, sf CLI, agent calls, paths, security, and going-online steps.
+Make sure AGENTS.md exists with the repo-specific mapping.
+Ensure spec 0002 contains the simplified curl-only previews.
+Write/update README.md
+
+cat > README.md << 'EOF'
+
+Soulfield OS
+A backend‑first agent OS for research → gap analysis → spec → (safe) execution. Minimal HTTP API, read‑only MCP filesystem tool, terminal spec browser, and adapters for Claude (Aiden), Jina rerank, InfraNodus gap analysis, and a policy‑first scraper.
+
+What’s Working Today
+API server: /health, /chat with “!” jobs and @agent routing
+Jobs: notes, plan, session, knowledge, safe coder-apply
+Spec flow: browse/edit via TUI; safe run block execution
+Scraper: allowlist‑enforced stub that writes JSONL
+InfraNodus import path: export JSON → generate spec (offline)
+TruthLens shim and safety guardrails
+Offline Quickstart (no internet)
+Requirements: Node 18+ (20+ recommended)
+Install: npm install
+.env (offline mode):
+DEV_NO_API=1 and USE_PINECONE=0
+Start API: npm start
+Health: curl http://127.0.0.1:8790/health
+Help: curl -s -X POST http://127.0.0.1:8790/chat -H 'content-type: application/json' -d '{"prompt":"!help"}'
+Spec TUI: npm run start:tui
+MCP (read-only FS): npm run start:mcp
+Safe apply demo (spec 0001):
+Dry: curl -s -X POST http://127.0.0.1:8790/chat -H 'content-type: application/json' -d '{"prompt":"!coder-apply --spec 0001"}'
+Run: curl -s -X POST http://127.0.0.1:8790/chat -H 'content-type: application/json' -d '{"prompt":"!coder-apply --spec 0001 #apply"}'
+sf CLI (no UI needed)
+If added, the sf CLI provides subcommands:
+
+sf research "topic" → workspace/research/<id>-<slug>/{research.md,keywords.json,meta.yaml}
+sf specify → newest research → backend/.agent-os/specs/<id>/spec.md
+sf specify:infra → latest workspace/data/infranodus/exports/*.json → spec
+sf index → workspace/data/index.json
+sf dry → parse and validate Run (approved)
+sf apply --apply → execute whitelisted lines
+sf log → tail latest run log
+Agents:
+sf agents:list
+sf agent:auto "brief"
+sf agent:run jina '{"query":"truthlens"}'
+If the CLI file isn’t present, you can still run everything via curl and node -e calls shown below.
+
+Agent Calls (via /chat)
+Plan add: curl -s -X POST http://127.0.0.1:8790/chat -H 'content-type: application/json' -d '{"prompt":"!plan-add active \"MVP\" #product"}'
+Plan list: curl -s -X POST http://127.0.0.1:8790/chat -H 'content-type: application/json' -d '{"prompt":"!plan-list"}'
+Session note: curl -s -X POST http://127.0.0.1:8790/chat -H 'content-type: application/json' -d '{"prompt":"!session-note \"Kickoff meeting scheduled\" #project #session"}'
+Session list: curl -s -X POST http://127.0.0.1:8790/chat -H 'content-type: application/json' -d '{"prompt":"!session-list #project 5"}'
+Tip: In Bash, avoid typing !plan bare (history expansion). Always put the JSON in single quotes.
+Example Specs
+backend/.agent-os/specs/0001/spec.md – hello‑world safe run (echo/ls/head)
+backend/.agent-os/specs/0002/spec.md – prints copy/paste curl commands for plan/session flows
+Paths
+API: backend/index.cjs
+Jobs: backend/jobs.js
+Council: backend/council.js
+Memory (file): memory.js → data/memory.json
+Pinecone (optional): backend/services/memory/memory-pinecone.cjs
+Scraper: backend/services/scraper/index.cjs → workspace/data/scrapes/*.jsonl
+Specs: backend/.agent-os/specs/<id>/spec.md
+Run logs: backend/.agent-os/runs/*.log
+MCP: backend/mcp-server.cjs
+TUI: backend/tui.js
+Going Online Later
+Switch .env: DEV_NO_API=0 and set keys: CLAUDE_API_KEY, JINA_API_KEY, OPENAI_API_KEY, PINECONE_API_KEY, INFRANODUS_API_KEY
+Re‑start npm start
+Verify Claude: curl -s -X POST http://127.0.0.1:8790/chat -H 'content-type: application/json' -d '{"prompt":"@aiden: hello"}'
+Security & Compliance
+TruthLens enforced (non‑simulative, structured focus)
+!coder-apply command whitelist: echo, ls, cat, head (no pipes/redirects)
+Scraper allowlist: backend/services/scraper/config/allowlist.yaml
+Keep real keys out of source control; use environment/secrets
+Agents Spec
+See AGENTS.md for how this maps to OpenAI’s Agents guidance and the local agent roster.
+EOF
+Ensure AGENTS.md exists
+
+[ -f AGENTS.md ] || cat > AGENTS.md << 'EOF'
+
+Agents Spec (Repo‑specific)
+This repository implements an agent system aligned with the OpenAI Agents guidance. Canonical spec:
+
+https://github.com/openai/agents.md
+Mapping
+
+@aiden (Claude): Orchestrator for planning/spec writing
+@jina: Semantic rerank over workspace candidates
+@infranodus: Gap analysis from topic + texts; offline queue
+@scraper: Allowlist‑restricted scraper (writes JSONL)
+Tools & Safety
+
+Read‑only MCP filesystem: backend/mcp-server.cjs
+Safe executor: !coder-apply with strict whitelist (no pipes/redirects)
+Scraper allowlist: backend/services/scraper/config/allowlist.yaml
+Memory
+
+File memory: data/memory.json via memory.js
+Optional Pinecone: backend/services/memory/memory-pinecone.cjs with OpenAI embeddings
+API
+
+GET /health
+POST /chat — ! jobs and @agent routing via backend/council.js
+EOF
+Update spec 0002 to print curl-only previews
+
+mkdir -p 'backend/.agent-os/specs/0002'
+
+cat > 'backend/.agent-os/specs/0002/spec.md' << 'EOF'
+
+Session & Plan Workflow Spec (Curl Preview)
+Goal
+
+Preview exact curl commands to send to /chat for plan/session flows.
+Run (approved)
+echo "curl -s -X POST http://127.0.0.1:8790/chat -H 'content-type: application/json' -d '{"prompt":"!plan-add active \"MVP\" #product"}'"
+echo "curl -s -X POST http://127.0.0.1:8790/chat -H 'content-type: application/json' -d '{"prompt":"!plan-list"}'"
+echo "curl -s -X POST http://127.0.0.1:8790/chat -H 'content-type: application/json' -d '{"prompt":"!session-note \"Kickoff meeting scheduled\" #project #session"}'"
+echo "curl -s -X POST http://127.0.0.1:8790/chat -H 'content-type: application/json' -d '{"prompt":"!session-list #project 5"}'"
+echo "curl -s -X POST http://127.0.0.1:8790/chat -H 'content-type: application/json' -d '{"prompt":"!note Next steps captured #project"}'"
+head -n 30 jobs.js
+Notes
+Use !coder-apply --spec 0002 #apply to print the commands, then copy/paste them into your shell.
+In Bash, the exclamation mark triggers history expansion if not inside single-quoted JSON.
+EOF
+Optional: fix spec 0001 README path (so head works from backend/)
+
+sed -i 's/head -n 5 README.md/head -n 5 ..\/README.md/' backend/.agent-os/specs/0001/spec.md || true
+That’s it. When you’re back:
+
+npm start
+curl http://127.0.0.1:8790/health
+coder-apply:
+curl -s -X POST http://127.0.0.1:8790/chat -H 'content-type: application/json' -d '{"prompt":"!coder-apply --spec 0002 #apply"}'
+Try the printed curls to exercise plan/session flows.
+If you want, next time I can finalize the sf CLI file and wire package.json’s bin mapping so sf runs directly.

@@ -1,0 +1,41 @@
+# run @ 2025-08-28T22:29:53.062Z  (cwd:/home/michael/soulfield)
+
+$ mkdir -p /home/michael/soulfield/projects
+
+$ mkdir -p /home/michael/soulfield/projects/records
+
+$ mkdir -p /home/michael/soulfield/projects/templates
+
+$ mkdir -p /home/michael/soulfield/projects/prompts
+
+$ printf '%s\n' \
+\
+
+$ printf '%s\n' \
+\
+
+$ printf '%s\n' \
+\
+
+$ printf '%s\n' \
+\
+
+$ printf '%s\n' \
+\
+
+$ printf '%s\n' \
+\
+
+$ printf '%s\n' \
+\
+
+$ head -n 20 /home/michael/soulfield/projects/README.md
+head: cannot open '/home/michael/soulfield/projects/README.md' for reading: No such file or directory
+
+$ head -n 50 /home/michael/soulfield/projects/projects.json
+[]
+
+$ ls -la /home/michael/soulfield/projects/records
+total 8
+drwxrwxr-x 2 michael michael 4096 Aug 28 21:10 .
+drwxrwxr-x 5 michael michael 4096 Aug 28 22:53 ..

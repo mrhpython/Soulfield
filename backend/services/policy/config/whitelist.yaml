@@ -1,0 +1,19 @@
+# Whitelist for policy/compliance checks (UK marketplace)
+commands:
+  - echo
+  - ls
+  - head
+  - cat
+  - test
+  - grep
+
+files:
+  # legal pages we require
+  - ./legal/privacy.md
+  - ./legal/terms.md
+  - ./legal/returns.md
+  - ./legal/cookies.md
+
+  # optional, used by some specs
+  - ./requirements.txt
+  - ./public/index.html

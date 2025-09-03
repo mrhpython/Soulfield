@@ -1,0 +1,173 @@
+{
+  "schema": {
+    "keyword": "string",
+    "intent": "info|nav|comm|trans",
+    "difficulty": 1,
+    "volume_est": 1,
+    "cpc_est": 0,
+    "cluster": "string",
+    "priority": 1
+  },
+  "items": [
+    {
+      "keyword": "online business ideas uk",
+      "intent": "info",
+      "difficulty": 45,
+      "volume_est": 2400,
+      "cluster": "ideation",
+      "priority": 9
+    },
+    {
+      "keyword": "start online business uk",
+      "intent": "info",
+      "difficulty": 38,
+      "volume_est": 1900,
+      "cluster": "getting-started",
+      "priority": 10
+    },
+    {
+      "keyword": "uk online business tax",
+      "intent": "info",
+      "difficulty": 52,
+      "volume_est": 880,
+      "cluster": "compliance",
+      "priority": 8
+    },
+    {
+      "keyword": "vat registration online business",
+      "intent": "trans",
+      "difficulty": 41,
+      "volume_est": 720,
+      "cluster": "compliance",
+      "priority": 7
+    },
+    {
+      "keyword": "online business bank account uk",
+      "intent": "comm",
+      "difficulty": 35,
+      "volume_est": 1100,
+      "cluster": "operations",
+      "priority": 8
+    },
+    {
+      "keyword": "companies house online registration",
+      "intent": "nav",
+      "difficulty": 28,
+      "volume_est": 3300,
+      "cluster": "formation",
+      "priority": 6
+    },
+    {
+      "keyword": "online tutoring business uk",
+      "intent": "info",
+      "difficulty": 32,
+      "volume_est": 590,
+      "cluster": "niche-ideas",
+      "priority": 7
+    },
+    {
+      "keyword": "uk dropshipping alternatives",
+      "intent": "info",
+      "difficulty": 44,
+      "volume_est": 480,
+      "cluster": "business-models",
+      "priority": 5
+    },
+    {
+      "keyword": "online course platform uk",
+      "intent": "comm",
+      "difficulty": 48,
+      "volume_est": 390,
+      "cluster": "platforms",
+      "priority": 8
+    },
+    {
+      "keyword": "uk affiliate marketing tax",
+      "intent": "info",
+      "difficulty": 56,
+      "volume_est": 320,
+      "cluster": "compliance",
+      "priority": 6
+    },
+    {
+      "keyword": "making tax digital software",
+      "intent": "comm",
+      "difficulty": 39,
+      "volume_est": 1600,
+      "cluster": "compliance",
+      "priority": 7
+    },
+    {
+      "keyword": "online consulting business uk",
+      "intent": "info",
+      "difficulty": 36,
+      "volume_est": 470,
+      "cluster": "niche-ideas",
+      "priority": 8
+    },
+    {
+      "keyword": "uk payment gateway comparison",
+      "intent": "comm",
+      "difficulty": 42,
+      "volume_est": 260,
+      "cluster": "operations",
+      "priority": 9
+    },
+    {
+      "keyword": "ir35 online business",
+      "intent": "info",
+      "difficulty": 61,
+      "volume_est": 210,
+      "cluster": "compliance",
+      "priority": 5
+    },
+    {
+      "keyword": "uk saas business ideas",
+      "intent": "info",
+      "difficulty": 53,
+      "volume_est": 170,
+      "cluster": "niche-ideas",
+      "priority": 7
+    },
+    {
+      "keyword": "online business insurance uk",
+      "intent": "comm",
+      "difficulty": 37,
+      "volume_est": 880,
+      "cluster": "operations",
+      "priority": 6
+    },
+    {
+      "keyword": "uk digital nomad tax",
+      "intent": "info",
+      "difficulty": 58,
+      "volume_est": 140,
+      "cluster": "compliance",
+      "priority": 4
+    },
+    {
+      "keyword": "online membership site uk",
+      "intent": "info",
+      "difficulty": 40,
+      "volume_est": 110,
+      "cluster": "business-models",
+      "priority": 6
+    },
+    {
+      "keyword": "uk online business grants",
+      "intent": "info",
+      "difficulty": 46,
+      "volume_est": 390,
+      "cluster": "funding",
+      "priority": 5
+    },
+    {
+      "keyword": "gdpr online business uk",
+      "intent": "info",
+      "difficulty": 49,
+      "volume_est": 320,
+      "cluster": "compliance",
+      "priority": 7
+    }
+  ]
+}

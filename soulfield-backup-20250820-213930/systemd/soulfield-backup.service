@@ -1,0 +1,9 @@
+[Unit]
+Description=Soulfield nightly backup
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/michael/soulfield
+ExecStart=/usr/bin/curl -s -X POST http://localhost:8790/chat \
+  -H 'Content-Type: application/json' \
+  -d '{"prompt":"!backup nightly"}'

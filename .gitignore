@@ -1,0 +1,8 @@
+# secrets & local state
+.env
+.env.*
+!.env.example
+receipts/
+notes.md
+node_modules/
+npm-debug.log*

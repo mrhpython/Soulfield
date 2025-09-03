@@ -1,0 +1,114 @@
+awesome—here’s a clean, current “what we have + how to run it” so you don’t need any UI to remember stuff.
+
+Soulfield OS — quick command map
+Core loop (gap → research → spec → compliance → execute)
+
+Research
+
+sf research "your topic here"
+# => creates: workspace/research/<id>-<slug>/{research.md,keywords.json,meta.yaml}
+
+
+Turn newest research → spec (Aiden/Claude)
+
+sf specify
+# => writes: .agent-os/specs/<timestamp>-<slug>/spec.md
+
+
+(InfraNodus) convert a graph export → spec
+
+Put your InfraNodus JSON export into:
+~/soulfield/workspace/data/infranodus/exports/
+
+Then:
+
+sf specify:infra
+# => writes: .agent-os/specs/<timestamp>-from-infra-infra/spec.md
+
+
+Refresh the index (TruthLens + Agents can see everything)
+
+sf index
+# => builds/updates: workspace/data/index.json
+
+
+Dry-run the selected spec
+
+sf dry
+# Extracts the ## Run (approved) block, validates whitelisted commands, no changes
+
+
+Apply (execute)
+
+sf apply --apply
+# Runs only whitelisted lines from ## Run (approved)
+
+
+Logs
+
+sf log             # tail most recent .agent-os/runs/*-run.log
+---
+
+Where files live
+---
+
+Research: workspace/research/<id>-<slug>/
+
+Specs (generated): .agent-os/specs/<timestamp>-*/spec.md
+
+Index: workspace/data/index.json
+
+Knowledge / policy:
+
+workspace/knowledge/TruthLens.md (rules)
+
+workspace/knowledge/README.md
+
+workspace/knowledge/UK-Online-Compliance.md
+
+Compliance policy:
+
+backend/services/policy/uk-online-marketplace.yaml
+
+backend/services/policy/config/whitelist.yaml (allowed command verbs for ## Run)
+
+InfraNodus:
+
+exports in: workspace/data/infranodus/exports/
+
+incoming/processed: workspace/data/infranodus/incoming/
+
+Scraper (Bright Data):
+
+allowlist domains: backend/services/scraper/config/allowlist.yaml
+
+saved results: workspace/data/scrapes/*.jsonl
+---
+
+Agent helpers (wired stubs in code, safe to call)
+---
+
+We added a tiny manager so you can “route” tasks without a UI.
+
+List agents:
+
+node -e "const m=require('./backend/agents/manager.cjs'); console.table(m.listAgents())"
+
+
+Auto route (lets Claude pick, today routes simple heuristics):
+
+node -e "const m=require('./backend/agents/manager.cjs'); m.autoRoute({brief:'semantic search over workspace about TruthLens'}).then(x=>console.log(x))"
+node -e "const m=require('./backend/agents/manager.cjs'); m.autoRoute({brief:'do a compliant scrape on https://bbc.co.uk/news'}).then(x=>console.log(x))"
+
+
+Run specific handler:
+
+# Jina (stub): semantic search/rerank
+node -e "const m=require('./backend/agents/manager.cjs'); m.run('jina',{query:'truthlens'}).then(x=>console.log(x))"
+
+# InfraNodus (stub): gap analysis
+node -e "const m=require('./backend/agents/manager.cjs'); m.run('infranodus',{topic:'content gap demo',texts:['a','b']}).then(x=>console.log(x))"
+
+# Scraper (policy-first bright data path; today: local fetch w/ allowlist + logs)
+node -e "const m=require('./backend/agents/manager.cjs'); m.run('scraper',{url:'https://bbc.co.uk/'}).then(x=>console.log(x))"
+

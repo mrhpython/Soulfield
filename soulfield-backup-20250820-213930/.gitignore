@@ -1,0 +1,6 @@
+# secrets & local state
+.env
+receipts/
+notes.md
+node_modules/
+npm-debug.log*

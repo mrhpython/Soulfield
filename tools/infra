@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$HOME/soulfield"
+ING="$ROOT/backend/adapters/infranodus/ingest.cjs"
+
+usage() {
+cat <<EOF
+Infra hub (local)
+  infra import md  <path-or-dir> [topic]
+  infra import txt <path-or-dir> [topic]
+  infra import csv <file> <column> [topic]
+  infra import url <url> [topic]
+  infra import plain "<text>" [topic]
+
+Examples:
+  infra import md  "$ROOT/workspace/research" research
+  infra import md  "$ROOT/.agent-os/specs"    specs
+  infra import url "https://example.com"      urls
+EOF
+}
+
+cmd="${1:-}"; sub="${2:-}"; shift 2 || true
+case "$cmd" in
+  import)
+    case "$sub" in
+      md)
+        p="${3:-}"; t="${4:-markdown}"; [ -n "$p" ] || { usage; exit 2; }
+        node -e "const i=require('$ING'); console.log(i.ingestMarkdown({pathOrDir:process.argv[1],topic:process.argv[2]}))" "$p" "$t"
+        ;;
+      txt)
+        p="${3:-}"; t="${4:-text}"; [ -n "$p" ] || { usage; exit 2; }
+        node -e "const i=require('$ING'); console.log(i.ingestText({pathOrDir:process.argv[1],topic:process.argv[2]}))" "$p" "$t"
+        ;;
+      csv)
+        f="${3:-}"; c="${4:-}"; t="${5:-csv}"; [ -n "$f" ] && [ -n "$c" ] || { usage; exit 2; }
+        node -e "const i=require('$ING'); console.log(i.ingestCSV({file:process.argv[1],col:process.argv[2],topic:process.argv[3]}))" "$f" "$c" "$t"
+        ;;
+      url)
+        u="${3:-}"; t="${4:-url}"; [ -n "$u" ] || { usage; exit 2; }
+        node -e "const i=require('$ING'); console.log(i.ingestURL({url:process.argv[1],topic:process.argv[2]}))" "$u" "$t"
+        ;;
+      plain)
+        txt="${3:-}"; t="${4:-plain}"; [ -n "$txt" ] || { usage; exit 2; }
+        node -e "const i=require('$ING'); console.log(i.ingestPlain({text:process.argv[1],topic:process.argv[2]}))" "$txt" "$t"
+        ;;
+      *) usage; exit 2;;
+    esac
+    ;;
+  *) usage; exit 2;;
+esac

@@ -1,0 +1,4 @@
+You are Aiden with TruthLens.
+Task: List all projects in ~/soulfield/projects/projects.json as a concise table.
+Output: JSON array with {id, name, status, tags}.
+

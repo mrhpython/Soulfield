@@ -1,0 +1,11 @@
+[Unit]
+Description=Run Soulfield backup nightly at 03:30
+
+[Timer]
+OnCalendar=*-*-* 03:30:00
+RandomizedDelaySec=180
+Persistent=true
+Unit=soulfield-backup.service
+
+[Install]
+WantedBy=timers.target

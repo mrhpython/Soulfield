@@ -1,0 +1,77 @@
+Here’s what this repo is and how to run it.
+
+What It Is
+
+Purpose: A backend‑first “agent OS” that routes prompts to agents and tools for research → gap analysis → spec → (safe) execution. Primary agent is Claude (“Aiden”); helpers include Jina rerank, InfraNodus gap analysis, a policy‑first scraper, and a read‑only MCP filesystem tool.
+Core API: Minimal HTTP service with /health and /chat that:
+Routes “!” commands to a jobs handler (notes, plans, memory, golden ideas, safe runner).
+Routes normal text or “@agent …” to a council router which calls Claude with the agent’s system prompt.
+Storage/Memory: Simple JSON file memory by default; optional Pinecone vector memory with OpenAI embeddings.
+Compliance: “TruthLens” shim wraps outputs; scraper requires allowlist; MCP exposes read‑only workspace paths.
+Key Entry Points
+
+backend/index.cjs:1: Starts HTTP server, handles /health and /chat.
+backend/jobs.js:1: Implements “!” commands (notes, plans, golden, memory, coder‑apply).
+backend/council.js:1: Parses “@agent” routing and calls Claude via Messages API.
+backend/mcp-server.cjs:1: Exposes read‑only filesystem tools over HTTP for MCP.
+backend/tui.js:1: Terminal UI to browse/edit latest specs (.agent-os/specs/*/spec.md).
+backend/services/scraper/index.cjs:1: Scraper stub that only runs for domains in config/allowlist.yaml.
+backend/adapters/jina/index.cjs:1: Jina reranker adapter for semantic rerank.
+backend/adapters/infranodus/client.cjs:1: InfraNodus API client + offline queue.
+memory.js:1: File‑based memory with add/recall to data/memory.json.
+Project Layout
+
+backend/: API server, agents, adapters, services, MCP, tests.
+workspace/: Working area for specs, research, data, docs, knowledge.
+soulfield-gui/: Static mock HTML for a future GUI.
+legal/: Policy docs.
+receipts/: Run/job logs and backups.
+How To Run
+
+Requirements: Node.js 18+ (20+ recommended). Create or edit .env with the variables below. Do not check real keys into source control.
+Install deps: npm install
+Start API: node backend/index.cjs
+Health: curl -s http://127.0.0.1:8790/health
+Help menu: curl -s -X POST http://127.0.0.1:8790/chat -H 'content-type: application/json' -d '{"prompt":"!help"}'
+Talk to Aiden: curl -s -X POST http://127.0.0.1:8790/chat -H 'content-type: application/json' -d '{"prompt":"@aiden: Summarize the workspace goals"}'
+Run MCP (read‑only FS): node backend/mcp-server.cjs
+Tools manifest: http://127.0.0.1:8791/mcp/tools
+Calls: POST http://127.0.0.1:8791/mcp/call with { "name":"list_dir","args":{"path":"workspace"} }
+Open the Spec TUI: node backend/tui.js (browse and edit .agent-os/specs/*/spec.md)
+Safe apply from a spec: Use the chat command !coder-apply [--spec <id>] [#apply]
+Without #apply it dry‑runs and shows which commands would run.
+Only whitelisted commands (echo, ls, cat, head) execute.
+Test locally: node backend/tests/test-apply.js --apply
+Scraper allowlist: Add domains (one per line) to backend/services/scraper/config/allowlist.yaml; then use ! flows or the scraper handler.
+Environment Variables
+
+Claude: CLAUDE_API_KEY, AIDEN_MODEL (used by backend/council.js:39)
+Jina: JINA_API_KEY, JINA_MODEL (used by backend/adapters/jina/index.cjs:17)
+Pinecone (optional memory): USE_PINECONE=1, PINECONE_API_KEY, PINECONE_INDEX (used by backend/services/memory/index.cjs:3 and memory-pinecone.cjs)
+OpenAI embeddings (if Pinecone): OPENAI_API_KEY (used by backend/services/memory/memory-pinecone.cjs:23)
+InfraNodus: INFRANODUS_API_KEY, INFRANODUS_API_BASE (used by backend/adapters/infranodus/client.cjs:1)
+Useful “!” Commands
+
+!help: Command menu (backend/jobs.js:129)
+!note <text> #tags: Add note and memory
+!recall #tag: Recall memory entries
+!plan-add active|future "Name" #tags and !plan-list: Maintain a roadmap
+!golden "desc" #tags and !golden-list [#tag] [N]: Save and list “golden” ideas
+!session-note "text" #tags and !session-list [#tag] [N]: Track session timeline
+!learn <text> #tags and !knowledge-list [#tag] [N]: Knowledge capture
+!learn-file <relative/path> [#tags]: Ingest a file’s content into knowledge
+!coder-apply [--spec <id>] [#apply]: Execute only whitelisted commands from “## Run (approved)” in the latest (or given) spec
+Where Data Goes
+
+Memory: data/memory.json (file) or Pinecone index
+Plan/notes: backend/data/plan.json
+Specs: backend/.agent-os/specs/<id>/spec.md
+Apply logs: backend/.agent-os/runs/*.log
+Scraper: workspace/data/scrapes/*.jsonl
+InfraNodus: workspace/data/infranodus/{results,logs,incoming}
+Notable Rough Edges
+
+Module mismatch: backend/jobs.js:6 requires ./memory.js, but there is no backend/memory.js; the available implementation is memory.js at repo root or backend/services/memory/. Adjust require to point to the correct module.
+InfraNodus lens import: backend/adapters/infranodus/index.cjs:4 imports { apply } from truthlens.cjs, but that file exports applyTruthLens. This likely needs renaming to avoid runtime errors.
+Adapters vs handlers: backend/agents/manager.cjs references adapters/paths that may not fully align with the present files. Handlers under backend/agents/handlers/ appear to be the current route targets.
+package.json main: Points to index.js which doesn’t exist; run entry points directly as above.

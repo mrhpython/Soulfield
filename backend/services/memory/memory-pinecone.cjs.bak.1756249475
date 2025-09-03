@@ -1,0 +1,109 @@
+// backend/services/memory/memory-pinecone.cjs
+const { Pinecone } = require('@pinecone-database/pinecone');
+const OpenAI = require('openai');
+
+const INDEX  = process.env.PINECONE_INDEX    || 'soulfield-memory';
+const CLOUD  = process.env.PINECONE_CLOUD    || 'aws';
+const REGION = process.env.PINECONE_REGION   || 'us-east-1';
+const NS     = process.env.PINECONE_NAMESPACE || '_default_';
+const DIM    = 1536; // for text-embedding-3-small
+const MODEL  = process.env.EMBED_MODEL || 'text-embedding-3-small';
+
+const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY });
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+async function ensureIndex() {
+  const list = await pc.listIndexes();
+  const exists = list.indexes?.some(i => i.name === INDEX);
+  if (!exists) {
+    await pc.createIndex({
+      name: INDEX,
+      dimension: DIM,
+      metric: 'cosine',
+      spec: { serverless: { cloud: CLOUD, region: REGION } },
+    });
+  }
+  for (let i = 0; i < 60; i++) {
+    const d = await pc.describeIndex(INDEX);
+    if (d.status?.ready) break;
+    await new Promise(r => setTimeout(r, 2000));
+  }
+  return pc.index(INDEX).namespace(NS);
+}
+
+// chunker
+function* chunkText(doc, maxLen = 1000) {
+  const { id, text, meta = {} } = doc;
+  if (!text) return;
+  let i = 0;
+  for (let p = 0; p < text.length; p += maxLen) {
+    yield {
+      id: `${id}:${i}`,
+      text: text.slice(p, p + maxLen),
+      meta: { ...meta, doc_id: id, chunk: i },
+    };
+    i++;
+  }
+}
+
+// upsert
+async function upsertDocs(docs = []) {
+  const idx = await ensureIndex();
+  const records = [];
+  for (const doc of docs) {
+    for (const ch of chunkText(doc)) {
+      const emb = await openai.embeddings.create({
+        model: MODEL,
+        input: ch.text,
+      });
+      records.push({
+        id: ch.id,
+        values: emb.data[0].embedding,
+        metadata: { ...ch.meta, text: ch.text },
+      });
+    }
+  }
+  if (records.length) await idx.upsert(records);
+  return { ok: true, upserted: records.length };
+}
+
+// query
+async function query({ text, topK = 5, filter } = {}) {
+  const idx = await ensureIndex();
+  const emb = await openai.embeddings.create({
+    model: MODEL,
+    input: text,
+  });
+  const res = await idx.query({
+    topK,
+    vector: emb.data[0].embedding,
+    includeMetadata: true,
+    ...(filter ? { filter } : {}),
+  });
+  return {
+    ok: true,
+    matches: (res.matches || []).map(m => ({
+      id: m.id,
+      score: m.score,
+      meta: m.metadata || {},
+      text: m.metadata?.text || '',
+    })),
+  };
+}
+
+// delete by docId
+async function deleteDoc(docId) {
+  const idx = await ensureIndex();
+  await idx.deleteMany({ filter: { doc_id: { $eq: docId } } });
+  return { ok: true, deleted: docId };
+}
+
+// wipe namespace
+async function wipeNamespace() {
+  const idx = await ensureIndex();
+  await idx.deleteAll();
+  return { ok: true, wiped: NS };
+}
+
+module.exports = { ensureIndex, upsertDocs, query, deleteDoc, wipeNamespace };
+

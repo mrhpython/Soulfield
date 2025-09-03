@@ -1,0 +1,4 @@
+[
+  {"id":"coder","name":"CoderOS","role":"builder","status":"active"},
+  {"id":"aiden","name":"Aiden","role":"orchestrator","status":"active"}
+]

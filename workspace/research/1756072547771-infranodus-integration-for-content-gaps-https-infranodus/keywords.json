@@ -1,0 +1,20 @@
+{
+  "analysis_id": "uuid",
+  "content_gaps": [
+    {
+      "gap_type": "structural|topical|semantic",
+      "keywords": [
+        "term1",
+        "term2"
+      ],
+      "significance": 0.85,
+      "suggested_topics": [],
+      "competitor_coverage": {}
+    }
+  ],
+  "graph_metrics": {
+    "modularity": 0.42,
+    "betweenness": {},
+    "clusters": []
+  }
+}

@@ -1,0 +1,1317 @@
+ichael@Soulfield:~/soulfield$ cd ~/soulfield
+tree -a -L 3
+.
+├── .agent-os
+│   ├── instructions
+│   │   ├── core
+│   │   ├── execute-tasks.md
+│   │   └── meta
+│   ├── product
+│   ├── recaps
+│   ├── runs
+│   │   ├── 1755790950939-run.log
+│   │   ├── 1755791240743-run.log
+│   │   ├── 1755791435033-run.log
+│   │   ├── 1755794063744-run.log
+│   │   ├── 1756137443294-run.log
+│   │   ├── 1756137686754-run.log
+│   │   ├── 1756137716994-run.log
+│   │   ├── 1756151830778-run.log
+│   │   └── 1756152198958-run.log
+│   ├── specs
+│   │   ├── 1756133347793-from-infra-infra
+│   │   └── 1756133605606-from-infra-infra
+│   ├── standards
+│   │   ├── best-practices.md
+│   │   ├── code-style
+│   │   ├── code-style.md
+│   │   └── tech-stack.md
+│   └── zones.json
+├── archive
+│   └── bak
+│       ├── council.js.bak.20250821-231400
+│       ├── council.js.bak.20250821-232130
+│       ├── council.js.bak.20250821-232902
+│       ├── council.js.bak.20250821-233427
+│       ├── council.js.bak.20250821-233428
+│       ├── council.js.bak.20250821-234951
+│       ├── council.js.bak.20250822-000133
+│       ├── index.cjs.bak.20250821-231400
+│       ├── jobs.backup.2025-08-20-1438.js
+│       ├── jobs.backup.2025-08-20-1440.js
+│       ├── jobs.backup.2025-08-20-1536
+│       ├── jobs.js.bak.20250820-214244
+│       ├── jobs.js.bak.20250821-092627
+│       ├── jobs.js.bak.20250821-103719
+│       ├── jobs.js.bak.20250821-103819
+│       ├── jobs.js.bak.20250821-165314
+│       ├── jobs.js.bak.20250821-165919
+│       ├── jobs.js.bak.20250821-170827
+│       ├── jobs.js.bak.20250821-171352
+│       ├── jobs.js.bak.20250821-171849
+│       ├── jobs.js.bak.20250821-172257
+│       ├── jobs.js.bak.20250821-172712
+│       ├── jobs.js.bak.20250821-231400
+│       ├── jobs.js.bak.20250821-232130
+│       ├── jobs.js.bak.20250821-232902
+│       ├── jobs.js.bak.20250821-233427
+│       ├── jobs.js.bak.20250821-233428
+│       ├── plan.backup.2025-08-20-1438.json
+│       ├── plan.backup.2025-08-20-1440.json
+│       ├── soulfield.service.backup
+│       ├── truthLens.js.bak.20250822-001220
+│       └── tui.js.bak.20250820-221309
+├── backend
+│   ├── adapters
+│   │   ├── agents
+│   │   ├── agents.js
+│   │   ├── infranodus
+│   │   └── jina
+│   ├── agents
+│   │   ├── handlers
+│   │   ├── manager.cjs
+│   │   ├── manager.cjs.bak.20250824-235137
+│   │   └── registry.json
+│   ├── services
+│   │   ├── policy
+│   │   └── scraper
+│   └── truthlens.cjs
+├── .claude
+│   ├── agents
+│   │   ├── context-fetcher.md
+│   │   ├── date-checker.md
+│   │   ├── file-creator.md
+│   │   ├── git-workflow.md
+│   │   ├── project-manager.md
+│   │   └── test-runner.md
+│   └── commands
+│       ├── analyze-product.md
+│       ├── create-spec.md
+│       ├── create-tasks.md
+│       ├── execute-tasks.md
+│       └── plan-product.md
+├── council.js
+├── data
+│   ├── agents.json
+│   ├── memory.json
+│   └── plan.json
+├── .env
+├── .gitignore
+├── index.cjs
+├── jobs.js
+├── legal
+│   ├── cookies.md
+│   ├── privacy.md
+│   ├── returns.md
+│   └── terms.md
+├── .mcp
+│   └── servers.json
+├── mcp-server.cjs
+├── memory.js
+├── node_modules
+│   ├── accepts
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── asynckit
+│   │   ├── bench.js
+│   │   ├── index.js
+│   │   ├── lib
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   ├── parallel.js
+│   │   ├── README.md
+│   │   ├── serial.js
+│   │   ├── serialOrdered.js
+│   │   └── stream.js
+│   ├── axios
+│   │   ├── CHANGELOG.md
+│   │   ├── dist
+│   │   ├── index.d.cts
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── lib
+│   │   ├── LICENSE
+│   │   ├── MIGRATION_GUIDE.md
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── .bin
+│   │   ├── blessed -> ../blessed/bin/tput.js
+│   │   └── nanoid -> ../nanoid/bin/nanoid.js
+│   ├── blessed
+│   │   ├── bin
+│   │   ├── browser
+│   │   ├── CHANGELOG.md
+│   │   ├── example
+│   │   ├── index.js
+│   │   ├── lib
+│   │   ├── LICENSE
+│   │   ├── .npmignore
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── usr
+│   │   └── vendor
+│   ├── body-parser
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── lib
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── bytes
+│   │   ├── History.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── Readme.md
+│   ├── call-bind-apply-helpers
+│   │   ├── actualApply.d.ts
+│   │   ├── actualApply.js
+│   │   ├── applyBind.d.ts
+│   │   ├── applyBind.js
+│   │   ├── CHANGELOG.md
+│   │   ├── .eslintrc
+│   │   ├── functionApply.d.ts
+│   │   ├── functionApply.js
+│   │   ├── functionCall.d.ts
+│   │   ├── functionCall.js
+│   │   ├── .github
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── .nycrc
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── reflectApply.d.ts
+│   │   ├── reflectApply.js
+│   │   ├── test
+│   │   └── tsconfig.json
+│   ├── call-bound
+│   │   ├── CHANGELOG.md
+│   │   ├── .eslintrc
+│   │   ├── .github
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── .nycrc
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── test
+│   │   └── tsconfig.json
+│   ├── combined-stream
+│   │   ├── lib
+│   │   ├── License
+│   │   ├── package.json
+│   │   ├── Readme.md
+│   │   └── yarn.lock
+│   ├── content-disposition
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── content-type
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── cookie
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   └── SECURITY.md
+│   ├── cookie-signature
+│   │   ├── History.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── Readme.md
+│   ├── cors
+│   │   ├── CONTRIBUTING.md
+│   │   ├── HISTORY.md
+│   │   ├── lib
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── debug
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   └── src
+│   ├── delayed-stream
+│   │   ├── lib
+│   │   ├── License
+│   │   ├── Makefile
+│   │   ├── .npmignore
+│   │   ├── package.json
+│   │   └── Readme.md
+│   ├── depd
+│   │   ├── History.md
+│   │   ├── index.js
+│   │   ├── lib
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── Readme.md
+│   ├── dotenv
+│   │   ├── CHANGELOG.md
+│   │   ├── config.d.ts
+│   │   ├── config.js
+│   │   ├── lib
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   ├── README-es.md
+│   │   ├── README.md
+│   │   └── SECURITY.md
+│   ├── dunder-proto
+│   │   ├── CHANGELOG.md
+│   │   ├── .eslintrc
+│   │   ├── get.d.ts
+│   │   ├── get.js
+│   │   ├── .github
+│   │   ├── LICENSE
+│   │   ├── .nycrc
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── set.d.ts
+│   │   ├── set.js
+│   │   ├── test
+│   │   └── tsconfig.json
+│   ├── ee-first
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── encodeurl
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── escape-html
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── Readme.md
+│   ├── es-define-property
+│   │   ├── CHANGELOG.md
+│   │   ├── .eslintrc
+│   │   ├── .github
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── .nycrc
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── test
+│   │   └── tsconfig.json
+│   ├── es-errors
+│   │   ├── CHANGELOG.md
+│   │   ├── .eslintrc
+│   │   ├── eval.d.ts
+│   │   ├── eval.js
+│   │   ├── .github
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   ├── range.d.ts
+│   │   ├── range.js
+│   │   ├── README.md
+│   │   ├── ref.d.ts
+│   │   ├── ref.js
+│   │   ├── syntax.d.ts
+│   │   ├── syntax.js
+│   │   ├── test
+│   │   ├── tsconfig.json
+│   │   ├── type.d.ts
+│   │   ├── type.js
+│   │   ├── uri.d.ts
+│   │   └── uri.js
+│   ├── es-object-atoms
+│   │   ├── CHANGELOG.md
+│   │   ├── .eslintrc
+│   │   ├── .github
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── isObject.d.ts
+│   │   ├── isObject.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── RequireObjectCoercible.d.ts
+│   │   ├── RequireObjectCoercible.js
+│   │   ├── test
+│   │   ├── ToObject.d.ts
+│   │   ├── ToObject.js
+│   │   └── tsconfig.json
+│   ├── es-set-tostringtag
+│   │   ├── CHANGELOG.md
+│   │   ├── .eslintrc
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── .nycrc
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── test
+│   │   └── tsconfig.json
+│   ├── etag
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── express
+│   │   ├── History.md
+│   │   ├── index.js
+│   │   ├── lib
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── Readme.md
+│   ├── express-rate-limit
+│   │   ├── dist
+│   │   ├── license.md
+│   │   ├── package.json
+│   │   ├── readme.md
+│   │   └── tsconfig.json
+│   ├── finalhandler
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── follow-redirects
+│   │   ├── debug.js
+│   │   ├── http.js
+│   │   ├── https.js
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── form-data
+│   │   ├── CHANGELOG.md
+│   │   ├── index.d.ts
+│   │   ├── lib
+│   │   ├── License
+│   │   ├── node_modules
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── forwarded
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── fresh
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── function-bind
+│   │   ├── CHANGELOG.md
+│   │   ├── .eslintrc
+│   │   ├── .github
+│   │   ├── implementation.js
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── .nycrc
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   └── test
+│   ├── get-intrinsic
+│   │   ├── CHANGELOG.md
+│   │   ├── .eslintrc
+│   │   ├── .github
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── .nycrc
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   └── test
+│   ├── get-proto
+│   │   ├── CHANGELOG.md
+│   │   ├── .eslintrc
+│   │   ├── .github
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── .nycrc
+│   │   ├── Object.getPrototypeOf.d.ts
+│   │   ├── Object.getPrototypeOf.js
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── Reflect.getPrototypeOf.d.ts
+│   │   ├── Reflect.getPrototypeOf.js
+│   │   ├── test
+│   │   └── tsconfig.json
+│   ├── gopd
+│   │   ├── CHANGELOG.md
+│   │   ├── .eslintrc
+│   │   ├── .github
+│   │   ├── gOPD.d.ts
+│   │   ├── gOPD.js
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── test
+│   │   └── tsconfig.json
+│   ├── hasown
+│   │   ├── CHANGELOG.md
+│   │   ├── .eslintrc
+│   │   ├── .github
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── .nycrc
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   └── tsconfig.json
+│   ├── has-symbols
+│   │   ├── CHANGELOG.md
+│   │   ├── .eslintrc
+│   │   ├── .github
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── .nycrc
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── shams.d.ts
+│   │   ├── shams.js
+│   │   ├── test
+│   │   └── tsconfig.json
+│   ├── has-tostringtag
+│   │   ├── CHANGELOG.md
+│   │   ├── .eslintrc
+│   │   ├── .github
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── .nycrc
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── shams.d.ts
+│   │   ├── shams.js
+│   │   ├── test
+│   │   └── tsconfig.json
+│   ├── http-errors
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── node_modules
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── iconv-lite
+│   │   ├── Changelog.md
+│   │   ├── encodings
+│   │   ├── .github
+│   │   ├── .idea
+│   │   ├── lib
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── inherits
+│   │   ├── inherits_browser.js
+│   │   ├── inherits.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── ip-address
+│   │   ├── dist
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   └── src
+│   ├── ipaddr.js
+│   │   ├── ipaddr.min.js
+│   │   ├── lib
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── is-promise
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── index.mjs
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── readme.md
+│   ├── math-intrinsics
+│   │   ├── abs.d.ts
+│   │   ├── abs.js
+│   │   ├── CHANGELOG.md
+│   │   ├── constants
+│   │   ├── .eslintrc
+│   │   ├── floor.d.ts
+│   │   ├── floor.js
+│   │   ├── .github
+│   │   ├── isFinite.d.ts
+│   │   ├── isFinite.js
+│   │   ├── isInteger.d.ts
+│   │   ├── isInteger.js
+│   │   ├── isNaN.d.ts
+│   │   ├── isNaN.js
+│   │   ├── isNegativeZero.d.ts
+│   │   ├── isNegativeZero.js
+│   │   ├── LICENSE
+│   │   ├── max.d.ts
+│   │   ├── max.js
+│   │   ├── min.d.ts
+│   │   ├── min.js
+│   │   ├── mod.d.ts
+│   │   ├── mod.js
+│   │   ├── package.json
+│   │   ├── pow.d.ts
+│   │   ├── pow.js
+│   │   ├── README.md
+│   │   ├── round.d.ts
+│   │   ├── round.js
+│   │   ├── sign.d.ts
+│   │   ├── sign.js
+│   │   ├── test
+│   │   └── tsconfig.json
+│   ├── media-typer
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── merge-descriptors
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── license
+│   │   ├── package.json
+│   │   └── readme.md
+│   ├── mime-db
+│   │   ├── db.json
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── mime-types
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── mimeScore.js
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── ms
+│   │   ├── index.js
+│   │   ├── license.md
+│   │   ├── package.json
+│   │   └── readme.md
+│   ├── nanoid
+│   │   ├── bin
+│   │   ├── index.browser.js
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── nanoid.js
+│   │   ├── non-secure
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   └── url-alphabet
+│   ├── negotiator
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── lib
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── object-assign
+│   │   ├── index.js
+│   │   ├── license
+│   │   ├── package.json
+│   │   └── readme.md
+│   ├── object-inspect
+│   │   ├── CHANGELOG.md
+│   │   ├── .eslintrc
+│   │   ├── example
+│   │   ├── .github
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── .nycrc
+│   │   ├── package.json
+│   │   ├── package-support.json
+│   │   ├── readme.markdown
+│   │   ├── test
+│   │   ├── test-core-js.js
+│   │   └── util.inspect.js
+│   ├── once
+│   │   ├── LICENSE
+│   │   ├── once.js
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── on-finished
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── .package-lock.json
+│   ├── parseurl
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── path-to-regexp
+│   │   ├── dist
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── Readme.md
+│   ├── proxy-addr
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── proxy-from-env
+│   │   ├── .eslintrc
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── test.js
+│   │   └── .travis.yml
+│   ├── qs
+│   │   ├── CHANGELOG.md
+│   │   ├── dist
+│   │   ├── .editorconfig
+│   │   ├── .eslintrc
+│   │   ├── .github
+│   │   ├── lib
+│   │   ├── LICENSE.md
+│   │   ├── .nycrc
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   └── test
+│   ├── range-parser
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── raw-body
+│   │   ├── HISTORY.md
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   └── SECURITY.md
+│   ├── router
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── lib
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── safe-buffer
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── safer-buffer
+│   │   ├── dangerous.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   ├── Porting-Buffer.md
+│   │   ├── Readme.md
+│   │   ├── safer.js
+│   │   └── tests.js
+│   ├── send
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── serve-static
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── setprototypeof
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   └── test
+│   ├── side-channel
+│   │   ├── CHANGELOG.md
+│   │   ├── .editorconfig
+│   │   ├── .eslintrc
+│   │   ├── .github
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── .nycrc
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── test
+│   │   └── tsconfig.json
+│   ├── side-channel-list
+│   │   ├── CHANGELOG.md
+│   │   ├── .editorconfig
+│   │   ├── .eslintrc
+│   │   ├── .github
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── list.d.ts
+│   │   ├── .nycrc
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── test
+│   │   └── tsconfig.json
+│   ├── side-channel-map
+│   │   ├── CHANGELOG.md
+│   │   ├── .editorconfig
+│   │   ├── .eslintrc
+│   │   ├── .github
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── .nycrc
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── test
+│   │   └── tsconfig.json
+│   ├── side-channel-weakmap
+│   │   ├── CHANGELOG.md
+│   │   ├── .editorconfig
+│   │   ├── .eslintrc
+│   │   ├── .github
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── .nycrc
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── test
+│   │   └── tsconfig.json
+│   ├── statuses
+│   │   ├── codes.json
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── toidentifier
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── type-is
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── unpipe
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   ├── vary
+│   │   ├── HISTORY.md
+│   │   ├── index.js
+│   │   ├── LICENSE
+│   │   ├── package.json
+│   │   └── README.md
+│   └── wrappy
+│       ├── LICENSE
+│       ├── package.json
+│       ├── README.md
+│       └── wrappy.js
+├── package.json
+├── package-lock.json
+├── receipts
+│   ├── 1755609693329-aru23loic8j.json
+│   ├── 1755609719521-l6m2de1ngl.json
+│   ├── 1755609719535-xavzhpytc9i.json
+│   ├── 1755609719548-ioyi2xdpfys.json
+│   ├── 1755610336929-3x8zrc5au9r.json
+│   ├── 1755610469811-98cidizs605.json
+│   ├── 1755610601726-unvxa6nac3.json
+│   ├── 1755610618277-43vr2gr4hn5.json
+│   ├── 1755610645469-5vbn30hlyi9.json
+│   ├── 1755610645482-dz73emd1dk7.json
+│   ├── 1755610645494-ee3954c6lg.json
+│   ├── 1755610856468-7fehpipfkli.json
+│   ├── 1755614239971-i3r9gfh999.json
+│   ├── 1755614256592-y19q9mhs5ya.json
+│   ├── 1755615546279-7koq1sib3wh.json
+│   ├── 1755615547914-m92qfbp2r0i.json
+│   ├── 1755615570611-g413tf64hpm.json
+│   ├── 1755616937385-eafoh00t5nm.json
+│   ├── 1755617061075-l0bpfza7yy.json
+│   ├── 1755617122657-fi0rsskri2q.json
+│   ├── 1755617597618-l1r3wyurvse.json
+│   ├── 1755617597630-nh8usjqmjd.json
+│   ├── 1755617851810-bpnhtef9kmm.json
+│   ├── 1755618628800-26zt9imrbnf.json
+│   ├── 1755618628812-n7730w1mdoi.json
+│   ├── 1755618949050-e9q1oo45619.json
+│   ├── 1755618959402-wp4hgv5w1p.json
+│   ├── 1755620327045-oa1eu0vn3ri.json
+│   ├── 1755620327057-m20o0bkasim.json
+│   ├── 1755620722595-mm86hpptqh.json
+│   ├── 1755620722607-sk1mbczqik.json
+│   ├── 1755626119140-v2lc0s4mf48.json
+│   ├── 1755626155382-orzvsdddsq.json
+│   ├── 1755626743407-r91vd7akwgd.json
+│   ├── 1755626813134-bfo1rszzl7k.json
+│   ├── 1755626813146-jqvh4lmzvkn.json
+│   ├── 1755627026380-cofkhhn1v9.json
+│   ├── 1755627265433-snjl9dkkdx9.json
+│   ├── 1755627271382-p0mhoz7d6l8.json
+│   ├── 1755627276918-x9rj4hdq4eh.json
+│   ├── 1755627545047-ba3jtdvvlrb.json
+│   ├── 1755627553490-o710tinrub.json
+│   ├── 1755627560457-fnkgar4qn9l.json
+│   ├── 1755627571723-qyqt28tt7w.json
+│   ├── 1755627571735-ujmnkepmpkk.json
+│   ├── 1755627579479-preze78iv3d.json
+│   ├── 1755627611480-rybmi3epv6s.json
+│   ├── 1755627835050-n7ajc5ds94.json
+│   ├── 1755627867042-kljjisf93ki.json
+│   ├── 1755627879486-soelhspnjd.json
+│   ├── 1755629880430-6zbxgjne63d.json
+│   ├── 1755629899671-58id4i8sn24.json
+│   ├── 1755629914752-ulphk37k2i.json
+│   ├── 1755629923671-sxjwi7gyv1.json
+│   ├── 1755685492680-hlo1xmh8yxh.json
+│   ├── 1755686896195-uhlkqroxsi.json
+│   ├── 1755689192306-fz125jpp1hp.json
+│   ├── 1755689205496-r6xvgssb7so.json
+│   ├── 1755689393338-v6bdludklq.json
+│   ├── 1755689393369-mewks12si4h.json
+│   ├── 1755689400015-5b478oms984.json
+│   ├── 1755689406028-cpq81t527g7.json
+│   ├── 1755689430092-rqwf9mqrt2g.json
+│   ├── 1755689508154-kpg51vwva6n.json
+│   ├── 1755689520880-s4wwbu12bf8.json
+│   ├── 1755689527961-j1epgbcqzw.json
+│   ├── 1755689536627-iz6msca06ne.json
+│   ├── 1755690618567-b8futqu29k5.json
+│   ├── 1755690624263-3yu3exao39a.json
+│   ├── 1755690630506-5nb6ojr2dgr.json
+│   ├── 1755690831982-z27j611hn9.json
+│   ├── 1755691056835-natmf7gxa6.json
+│   ├── 1755691065891-kbcqsts977.json
+│   ├── 1755691076271-baogj8cdhtc.json
+│   ├── 1755691084743-qb0we0vrhhk.json
+│   ├── 1755691093191-h60c2plupi6.json
+│   ├── 1755691281090-ellntf6ief.json
+│   ├── 1755691294181-wq79ehuj6ha.json
+│   ├── 1755691304492-era4db3khno.json
+│   ├── 1755691315197-abbrjaondu.json
+│   ├── 1755692419778-rkc13otn98.json
+│   ├── 1755696937754-9acuatorcf.json
+│   ├── 1755697714081-a10h0r6sgv.json
+│   ├── 1755697714100-7y9pzsvfiom.json
+│   ├── 1755697714127-0vg6growbhx.json
+│   ├── 1755697714140-7zc4tanjj27.json
+│   ├── 1755697714151-tt6foindrm.json
+│   ├── 1755697714160-es2r1wkkbz.json
+│   ├── 1755698137809-7alldm10gkk.json
+│   ├── 1755698144787-zq1mc7dyr4.json
+│   ├── 1755698153104-slokbk7xjm.json
+│   ├── 1755698318623-uiqqrrfcbm.json
+│   ├── 1755700232883-9g8g3735tzs.json
+│   ├── 1755700371944-2u4eujxd5jf.json
+│   ├── 1755701529472-qv0mp6gm7.json
+│   ├── 1755701991630-96h8at0o29s.json
+│   ├── 1755702009866-u5p2zbvbwg.json
+│   ├── 1755702016234-74sba4q6g0d.json
+│   ├── 1755702364788-zxj8m82ik9.json
+│   ├── 1755702364802-774jrr1qi4i.json
+│   ├── 1755702364829-z85hc4riz1o.json
+│   ├── 1755702444656-jpvl3oeylj.json
+│   ├── 1755702828134-ghmrj4zjc1e.json
+│   ├── 1755702835168-pbjvav77ocd.json
+│   ├── 1755702842809-svkrl6lpa0d.json
+│   ├── 1755703426539-zxpm5ronxvc.json
+│   ├── 1755716572586-avkc5z7a39m.json
+│   ├── 1755716849471-8qdwtfw84d.json
+│   ├── 1755716849489-7m7q5hkxz6g.json
+│   ├── 1755716920849-xn9uqf97yxj.json
+│   ├── 1755716955492-16d1oosa73v.json
+│   ├── 1755716994767-12fdcfe135pb.json
+│   ├── 1755717130858-6ur6hripwii.json
+│   ├── 1755717427163-5ldmfqxyh8.json
+│   ├── 1755717441241-umnzmy7htlg.json
+│   ├── 1755717549842-9tuj1tsibn.json
+│   ├── 1755717719603-5268cxpum3j.json
+│   ├── 1755717739428-rj0t0dzm7g.json
+│   ├── 1755717919331-a7yigp9iep.json
+│   ├── 1755717929727-z7ysgat3ne.json
+│   ├── 1755718137342-s4w8dqadlgt.json
+│   ├── 1755718137360-y1xkxtp1iap.json
+│   ├── backups
+│   │   ├── index.cjs.backup.2025-08-20-1144
+│   │   ├── jobs.backup.2025-08-19-1633
+│   │   ├── jobs.backup.2025-08-19-1905
+│   │   └── jobs.backup.2025-08-19-1914
+│   ├── jobs.backup.2025-08-20-1559
+│   ├── jobs.backup.2025-08-20-1633
+│   ├── jobs.backup.2025-08-20-1634
+│   ├── jobs.backup.2025-08-20-1637
+│   ├── jobs.backup.2025-08-20-1642
+│   └── jobs.backup.2025-08-20-1643
+├── requirements.txt
+├── soulfield-backup-20250820-213930
+│   ├── .agent-os
+│   │   ├── instructions
+│   │   ├── product
+│   │   ├── recaps
+│   │   ├── specs
+│   │   └── standards
+│   ├── .claude
+│   │   ├── agents
+│   │   └── commands
+│   ├── council.js
+│   ├── data
+│   │   ├── agents.json
+│   │   ├── memory.json
+│   │   ├── plan.backup.2025-08-20-1438.json
+│   │   ├── plan.backup.2025-08-20-1440.json
+│   │   ├── plan.json
+│   │   └── soulfield.service.backup
+│   ├── .env
+│   ├── .gitignore
+│   ├── index.cjs
+│   ├── jobs.backup.2025-08-20-1438.js
+│   ├── jobs.backup.2025-08-20-1440.js
+│   ├── jobs.backup.2025-08-20-1536
+│   ├── jobs.js
+│   ├── .mcp
+│   │   └── servers.json
+│   ├── memory.js
+│   ├── node_modules
+│   │   ├── accepts
+│   │   ├── asynckit
+│   │   ├── axios
+│   │   ├── .bin
+│   │   ├── body-parser
+│   │   ├── bytes
+│   │   ├── call-bind-apply-helpers
+│   │   ├── call-bound
+│   │   ├── combined-stream
+│   │   ├── content-disposition
+│   │   ├── content-type
+│   │   ├── cookie
+│   │   ├── cookie-signature
+│   │   ├── cors
+│   │   ├── debug
+│   │   ├── delayed-stream
+│   │   ├── depd
+│   │   ├── dotenv
+│   │   ├── dunder-proto
+│   │   ├── ee-first
+│   │   ├── encodeurl
+│   │   ├── escape-html
+│   │   ├── es-define-property
+│   │   ├── es-errors
+│   │   ├── es-object-atoms
+│   │   ├── es-set-tostringtag
+│   │   ├── etag
+│   │   ├── express
+│   │   ├── express-rate-limit
+│   │   ├── finalhandler
+│   │   ├── follow-redirects
+│   │   ├── form-data
+│   │   ├── forwarded
+│   │   ├── fresh
+│   │   ├── function-bind
+│   │   ├── get-intrinsic
+│   │   ├── get-proto
+│   │   ├── gopd
+│   │   ├── hasown
+│   │   ├── has-symbols
+│   │   ├── has-tostringtag
+│   │   ├── http-errors
+│   │   ├── iconv-lite
+│   │   ├── inherits
+│   │   ├── ip-address
+│   │   ├── ipaddr.js
+│   │   ├── is-promise
+│   │   ├── math-intrinsics
+│   │   ├── media-typer
+│   │   ├── merge-descriptors
+│   │   ├── mime-db
+│   │   ├── mime-types
+│   │   ├── ms
+│   │   ├── nanoid
+│   │   ├── negotiator
+│   │   ├── object-assign
+│   │   ├── object-inspect
+│   │   ├── once
+│   │   ├── on-finished
+│   │   ├── .package-lock.json
+│   │   ├── parseurl
+│   │   ├── path-to-regexp
+│   │   ├── proxy-addr
+│   │   ├── proxy-from-env
+│   │   ├── qs
+│   │   ├── range-parser
+│   │   ├── raw-body
+│   │   ├── router
+│   │   ├── safe-buffer
+│   │   ├── safer-buffer
+│   │   ├── send
+│   │   ├── serve-static
+│   │   ├── setprototypeof
+│   │   ├── side-channel
+│   │   ├── side-channel-list
+│   │   ├── side-channel-map
+│   │   ├── side-channel-weakmap
+│   │   ├── statuses
+│   │   ├── toidentifier
+│   │   ├── type-is
+│   │   ├── unpipe
+│   │   ├── vary
+│   │   └── wrappy
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── plan.md
+│   ├── receipts
+│   │   ├── 1755609693329-aru23loic8j.json
+│   │   ├── 1755609719521-l6m2de1ngl.json
+│   │   ├── 1755609719535-xavzhpytc9i.json
+│   │   ├── 1755609719548-ioyi2xdpfys.json
+│   │   ├── 1755610336929-3x8zrc5au9r.json
+│   │   ├── 1755610469811-98cidizs605.json
+│   │   ├── 1755610601726-unvxa6nac3.json
+│   │   ├── 1755610618277-43vr2gr4hn5.json
+│   │   ├── 1755610645469-5vbn30hlyi9.json
+│   │   ├── 1755610645482-dz73emd1dk7.json
+│   │   ├── 1755610645494-ee3954c6lg.json
+│   │   ├── 1755610856468-7fehpipfkli.json
+│   │   ├── 1755614239971-i3r9gfh999.json
+│   │   ├── 1755614256592-y19q9mhs5ya.json
+│   │   ├── 1755615546279-7koq1sib3wh.json
+│   │   ├── 1755615547914-m92qfbp2r0i.json
+│   │   ├── 1755615570611-g413tf64hpm.json
+│   │   ├── 1755616937385-eafoh00t5nm.json
+│   │   ├── 1755617061075-l0bpfza7yy.json
+│   │   ├── 1755617122657-fi0rsskri2q.json
+│   │   ├── 1755617597618-l1r3wyurvse.json
+│   │   ├── 1755617597630-nh8usjqmjd.json
+│   │   ├── 1755617851810-bpnhtef9kmm.json
+│   │   ├── 1755618628800-26zt9imrbnf.json
+│   │   ├── 1755618628812-n7730w1mdoi.json
+│   │   ├── 1755618949050-e9q1oo45619.json
+│   │   ├── 1755618959402-wp4hgv5w1p.json
+│   │   ├── 1755620327045-oa1eu0vn3ri.json
+│   │   ├── 1755620327057-m20o0bkasim.json
+│   │   ├── 1755620722595-mm86hpptqh.json
+│   │   ├── 1755620722607-sk1mbczqik.json
+│   │   ├── 1755626119140-v2lc0s4mf48.json
+│   │   ├── 1755626155382-orzvsdddsq.json
+│   │   ├── 1755626743407-r91vd7akwgd.json
+│   │   ├── 1755626813134-bfo1rszzl7k.json
+│   │   ├── 1755626813146-jqvh4lmzvkn.json
+│   │   ├── 1755627026380-cofkhhn1v9.json
+│   │   ├── 1755627265433-snjl9dkkdx9.json
+│   │   ├── 1755627271382-p0mhoz7d6l8.json
+│   │   ├── 1755627276918-x9rj4hdq4eh.json
+│   │   ├── 1755627545047-ba3jtdvvlrb.json
+│   │   ├── 1755627553490-o710tinrub.json
+│   │   ├── 1755627560457-fnkgar4qn9l.json
+│   │   ├── 1755627571723-qyqt28tt7w.json
+│   │   ├── 1755627571735-ujmnkepmpkk.json
+│   │   ├── 1755627579479-preze78iv3d.json
+│   │   ├── 1755627611480-rybmi3epv6s.json
+│   │   ├── 1755627835050-n7ajc5ds94.json
+│   │   ├── 1755627867042-kljjisf93ki.json
+│   │   ├── 1755627879486-soelhspnjd.json
+│   │   ├── 1755629880430-6zbxgjne63d.json
+│   │   ├── 1755629899671-58id4i8sn24.json
+│   │   ├── 1755629914752-ulphk37k2i.json
+│   │   ├── 1755629923671-sxjwi7gyv1.json
+│   │   ├── 1755685492680-hlo1xmh8yxh.json
+│   │   ├── 1755686896195-uhlkqroxsi.json
+│   │   ├── 1755689192306-fz125jpp1hp.json
+│   │   ├── 1755689205496-r6xvgssb7so.json
+│   │   ├── 1755689393338-v6bdludklq.json
+│   │   ├── 1755689393369-mewks12si4h.json
+│   │   ├── 1755689400015-5b478oms984.json
+│   │   ├── 1755689406028-cpq81t527g7.json
+│   │   ├── 1755689430092-rqwf9mqrt2g.json
+│   │   ├── 1755689508154-kpg51vwva6n.json
+│   │   ├── 1755689520880-s4wwbu12bf8.json
+│   │   ├── 1755689527961-j1epgbcqzw.json
+│   │   ├── 1755689536627-iz6msca06ne.json
+│   │   ├── 1755690618567-b8futqu29k5.json
+│   │   ├── 1755690624263-3yu3exao39a.json
+│   │   ├── 1755690630506-5nb6ojr2dgr.json
+│   │   ├── 1755690831982-z27j611hn9.json
+│   │   ├── 1755691056835-natmf7gxa6.json
+│   │   ├── 1755691065891-kbcqsts977.json
+│   │   ├── 1755691076271-baogj8cdhtc.json
+│   │   ├── 1755691084743-qb0we0vrhhk.json
+│   │   ├── 1755691093191-h60c2plupi6.json
+│   │   ├── 1755691281090-ellntf6ief.json
+│   │   ├── 1755691294181-wq79ehuj6ha.json
+│   │   ├── 1755691304492-era4db3khno.json
+│   │   ├── 1755691315197-abbrjaondu.json
+│   │   ├── 1755692419778-rkc13otn98.json
+│   │   ├── 1755696937754-9acuatorcf.json
+│   │   ├── 1755697714081-a10h0r6sgv.json
+│   │   ├── 1755697714100-7y9pzsvfiom.json
+│   │   ├── 1755697714127-0vg6growbhx.json
+│   │   ├── 1755697714140-7zc4tanjj27.json
+│   │   ├── 1755697714151-tt6foindrm.json
+│   │   ├── 1755697714160-es2r1wkkbz.json
+│   │   ├── 1755698137809-7alldm10gkk.json
+│   │   ├── 1755698144787-zq1mc7dyr4.json
+│   │   ├── 1755698153104-slokbk7xjm.json
+│   │   ├── 1755698318623-uiqqrrfcbm.json
+│   │   ├── 1755700232883-9g8g3735tzs.json
+│   │   ├── 1755700371944-2u4eujxd5jf.json
+│   │   ├── 1755701529472-qv0mp6gm7.json
+│   │   ├── 1755701991630-96h8at0o29s.json
+│   │   ├── 1755702009866-u5p2zbvbwg.json
+│   │   ├── 1755702016234-74sba4q6g0d.json
+│   │   ├── 1755702364788-zxj8m82ik9.json
+│   │   ├── 1755702364802-774jrr1qi4i.json
+│   │   ├── 1755702364829-z85hc4riz1o.json
+│   │   ├── 1755702444656-jpvl3oeylj.json
+│   │   ├── 1755702828134-ghmrj4zjc1e.json
+│   │   ├── 1755702835168-pbjvav77ocd.json
+│   │   ├── 1755702842809-svkrl6lpa0d.json
+│   │   ├── 1755703426539-zxpm5ronxvc.json
+│   │   ├── 1755716572586-avkc5z7a39m.json
+│   │   ├── 1755716849471-8qdwtfw84d.json
+│   │   ├── 1755716849489-7m7q5hkxz6g.json
+│   │   ├── 1755716920849-xn9uqf97yxj.json
+│   │   ├── 1755716955492-16d1oosa73v.json
+│   │   ├── 1755716994767-12fdcfe135pb.json
+│   │   ├── 1755717130858-6ur6hripwii.json
+│   │   ├── 1755717427163-5ldmfqxyh8.json
+│   │   ├── 1755717441241-umnzmy7htlg.json
+│   │   ├── 1755717549842-9tuj1tsibn.json
+│   │   ├── 1755717719603-5268cxpum3j.json
+│   │   ├── 1755717739428-rj0t0dzm7g.json
+│   │   ├── 1755717919331-a7yigp9iep.json
+│   │   ├── 1755717929727-z7ysgat3ne.json
+│   │   ├── 1755718137342-s4w8dqadlgt.json
+│   │   ├── 1755718137360-y1xkxtp1iap.json
+│   │   ├── backups
+│   │   ├── jobs.backup.2025-08-20-1559
+│   │   ├── jobs.backup.2025-08-20-1633
+│   │   ├── jobs.backup.2025-08-20-1634
+│   │   ├── jobs.backup.2025-08-20-1637
+│   │   ├── jobs.backup.2025-08-20-1642
+│   │   └── jobs.backup.2025-08-20-1643
+│   ├── systemd
+│   │   ├── soulfield-backup.service
+│   │   └── soulfield-backup.timer
+│   ├── tools
+│   │   ├── agentos-local.js
+│   │   ├── mcp-fs.js
+│   │   └── run-coder.sh
+│   └── truthLens.js
+├── systemd
+│   ├── soulfield-backup.service
+│   └── soulfield-backup.timer
+├── test-apply.js
+├── test-council.js
+├── .tmp
+├── tools
+│   ├── agentos-local.js
+│   ├── aiden.cjs
+│   ├── cleanup-research.cjs
+│   ├── fill-research.cjs
+│   ├── index-knowledge.cjs
+│   ├── infra
+│   ├── mcp-fs.js
+│   ├── policy-legal-check.sh
+│   ├── research.cjs
+│   ├── research.cjs.bak.20250824-185618
+│   ├── run-coder.sh
+│   ├── scrape-allow
+│   ├── sf
+│   ├── sf-agent
+│   ├── spec-from-infra.cjs
+│   ├── spec-from-research.cjs
+│   └── spec-from-research.cjs.bak.20250824-205853
+├── truthLens.js
+├── tui.js
+└── workspace
+    ├── agents
+    │   ├── AGENTS.md
+    │   ├── CLAUDE.md
+    │   └── README.md
+    ├── backend
+    │   └── README.md
+    ├── data
+    │   ├── index.json
+    │   ├── infranodus
+    │   ├── jina
+    │   ├── README.md
+    │   └── scrapes
+    ├── docs
+    │   ├── competitor-market research.txt
+    │   ├── ebay scrapper.txt
+    │   ├── infra-spec pipline
+    │   ├── quick command map.txt
+    │   ├── README.md
+    │   ├── recap-20250825.md
+    │   └── STATUS.md
+    ├── .env
+    ├── frontend
+    │   └── README.md
+    ├── infra
+    │   └── README.md
+    ├── knowledge
+    │   ├── README.md
+    │   ├── TruthLens.md
+    │   └── UK-Online-Compliance.md
+    ├── logs
+    │   ├── agents
+    │   └── README.md
+    ├── product
+    │   ├── plan.md
+    │   └── README.md
+    ├── recaps
+    │   └── README.md
+    ├── research
+    │   ├── 1756050649128-mobile-car-valeting-in-manchester
+    │   ├── 1756060016868-online-business-ideas-uk
+    │   ├── 1756060424517-online-business-ideas-uk
+    │   ├── 1756072293111-integrate-https-github-com-wshobson-agents-as-agent-as-too
+    │   ├── 1756072547771-infranodus-integration-for-content-gaps-https-infranodus
+    │   ├── 1756072775834-bright-data-scraping-browser-integration-https-brightdata
+    │   ├── 1756073037056-jina-ai-for-retrieval-rerank-over-workspace-docs-https-do
+    │   └── README.md
+    └── specs
+        ├── 1755718137360-add-mcp-filesystem-read-only
+        ├── 1756050751235-mobile-car-valeting-in-manchester
+        ├── 1756060146183-online-business-ideas-uk
+        ├── 1756060658198-online-business-ideas-uk
+        ├── 1756065603596-online-business-ideas-uk
+        ├── 1756072380121-integrate-https-github-com-wshobson-agents-as-agent-as-too
+        ├── 1756072696357-infranodus-integration-for-content-gaps-https-infranodus
+        ├── 1756072926658-bright-data-scraping-browser-integration-https-brightdata
+        ├── 1756073128641-jina-ai-for-retrieval-rerank-over-workspace-docs-https-do
+        ├── 1756131879680-from-infra-infra
+        ├── 1756132538197-from-infra-infra
+        └── README.md
+
+332 directories, 979 files
+michael@Soulfield:~/soulfield$ 
+

@@ -1,0 +1,33 @@
+# run @ 2025-08-28T20:38:55.471Z  (cwd:/home/michael/soulfield)
+
+$ echo "seed AGENTS files (model=claude-opus-4-1-20250805)"
+seed AGENTS files (model=claude-opus-4-1-20250805)
+
+$ mkdir -p /home/michael/soulfield/agents
+
+$ mkdir -p /home/michael/soulfield/agents/prompts
+
+$ mkdir -p /home/michael/soulfield/agents/templates
+
+$ mkdir -p /home/michael/soulfield/agents/records
+
+$ printf '%s\n' \
+\
+
+$ printf '%s\n' \
+\
+
+$ printf '%s\n' \
+\
+
+$ printf '%s\n' \
+\
+
+$ printf '%s\n' \
+\
+
+$ printf '%s\n' \
+\
+
+$ printf '%s\n' \
+\

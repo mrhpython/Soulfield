@@ -1,0 +1,165 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# --- helpers ---------------------------------------------------------------
+research() { node "$HOME/soulfield/tools/research.cjs" "$@" | tee /dev/stderr; }
+specify()  { node "$HOME/soulfield/tools/spec-from-research.cjs" ${1:-} | tee /dev/stderr; }
+index_()   { node "$HOME/soulfield/tools/index-knowledge.cjs" | tee /dev/stderr; }
+
+apply_()   { node "$HOME/soulfield/test-apply.js" "$@" 2>/dev/null || echo "apply runner not wired here"; }
+dry_()     { node "$HOME/soulfield/test-apply.js" --dry "$@" 2>/dev/null || echo "dry runner not wired here"; }
+log_()     { tail -n 200 "$HOME/soulfield/.agent-os/runs/"*-run.log 2>/dev/null || echo "no run logs yet"; }
+
+usage() {
+  cat <<'USAGE'
+Usage:
+  sf research "<topic>"      # generate research files
+  sf specify [research-id]   # create spec.md from research
+  sf index                   # build workspace/data/index.json
+  sf apply|dry|log           # existing helpers (if you use them)
+USAGE
+}
+
+# --- router ----------------------------------------------------------------
+cmd="${1:-}"; shift || true
+case "$cmd" in
+  research) research "$@";;
+  specify)  specify "$@";;
+  index)    index_ ;;
+  apply)    apply_ "$@";;
+  dry)      dry_ "$@";;
+  log)      log_ ;;
+  ""|-h|--help|help) usage;;
+  *) echo "unknown: $cmd"; usage; exit 2;;
+esac
+
+clean() { 
+  if [ -z "${1:-}" ]; then
+    echo "usage: sf clean <research-id-folder>"
+    echo "example: sf clean 1756050649128-mobile-car-valeting-in-manchester"
+    exit 2
+  fi
+  node "$HOME/soulfield/tools/cleanup-research.cjs" "$1" | tee /dev/stderr
+}
+
+# router hook
+if [ "${1:-}" = "clean" ]; then shift; clean "$@"; exit $?; fi
+
+agent_list() {
+  node "$HOME/soulfield/backend/agents/manager.cjs" -e list 2>/dev/null \
+    || node -e "const m=require('$HOME/soulfield/backend/agents/manager.cjs'); console.table(m.listAgents())"
+}
+
+agent_run() {
+  # usage: sf agent:run <name> '<json>'
+  local name="$1"; shift
+  local payload="$1"
+  if [ -z "$name" ] || [ -z "$payload" ]; then
+    echo "usage: sf agent:run <name> '<json>'"
+    return 2
+  fi
+  node -e "const m=require('$HOME/soulfield/backend/agents/manager.cjs'); m.run('$name', JSON.parse(process.argv[1])).then(x=>console.log(JSON.stringify(x,null,2)))" "$payload"
+}
+
+agent_auto() {
+  # usage: sf agent:auto "<brief>"
+  local brief="$*"
+  if [ -z "$brief" ]; then
+    echo 'usage: sf agent:auto "brief with optional URL"'
+    return 2
+  fi
+  node -e "const m=require('$HOME/soulfield/backend/agents/manager.cjs'); m.autoRoute({brief: process.argv[1]}).then(x=>console.log(JSON.stringify(x,null,2)))" "$brief"
+}
+
+case "${1:-}" in
+  agent:list) shift; agent_list "$@";;
+  agent:run)  shift; agent_run  "$@";;
+  agent:auto) shift; agent_auto "$@";;
+esac
+
+infra_sync() {
+  "$HOME/soulfield/tools/infra" import md "$HOME/soulfield/workspace/research" research
+  "$HOME/soulfield/tools/infra" import md "$HOME/soulfield/.agent-os/specs"   specs
+}
+case "${1:-}" in
+  infra:sync) shift; infra_sync "$@"; exit $? ;;
+esac
+
+spec_from_infra() {
+  node "$HOME/soulfield/tools/spec-from-infra.cjs" "${1:-}"
+}
+case "${1:-}" in
+  specify:infra) shift; spec_from_infra "$@"; exit $? ;;
+esac
+
+spec_from_infra() {
+  node "$HOME/soulfield/tools/spec-from-infra.cjs" "${1:-}"
+}
+case "${1:-}" in
+  specify:infra) shift; spec_from_infra "$@"; exit $? ;;
+esac
+
+# --- Soulfield: InfraNodus → spec.md ---
+_specify_infra() {
+  set -euo pipefail
+  local RES="${1:-}"
+  if [ -z "${RES}" ]; then
+    RES="$(ls -t "$HOME/soulfield/workspace/data/infranodus/exports/"*.json 2>/dev/null | head -n1 || true)"
+  fi
+  if [ -z "${RES}" ] || [ ! -f "${RES}" ]; then
+    echo "No InfraNodus export JSON found. Put one in: $HOME/soulfield/workspace/data/infranodus/exports/"
+    exit 2
+  fi
+  node "$HOME/soulfield/tools/spec-from-infra.cjs" "$RES"
+}
+
+case "${1:-}" in
+  specify:infra) shift; _specify_infra "${1:-}"; exit $? ;;
+esac
+
+_specify_infra() {
+  set -euo pipefail
+  # Pick the file you pass in, otherwise choose the newest export
+  local src="${1:-}"
+  if [[ -z "${src}" ]]; then
+    src="$(ls -t "$HOME/soulfield/workspace/data/infranodus/exports/"*.json 2>/dev/null | head -n1 || true)"
+  fi
+  if [[ -z "${src}" || ! -f "${src}" ]]; then
+    echo "Usage: sf specify:infra <path-to-infranodus-export.json>"
+    echo "Hint: put exports in ~/soulfield/workspace/data/infranodus/exports/"
+    return 2
+  fi
+
+  # Generate spec from InfraNodus export
+  local out
+  out="$(node "$HOME/soulfield/tools/spec-from-infra.cjs" "$src")" || exit $?
+  echo "$out"
+
+  # (nice) refresh the index so agents can see it immediately
+  sf index >/dev/null || true
+}
+
+case "${1:-}" in
+  specify:infra) shift; _specify_infra "${1:-}"; exit $? ;;
+esac
+
+# --- Aiden/InfraNodus → spec generator (TruthLens-safe) ---
+_specify_infra() {
+  set -euo pipefail
+  local src="${1:-}"
+  # Default to newest export in workspace if no argument
+  if [[ -z "${src}" ]]; then
+    src="$(ls -t "$HOME/soulfield/workspace/data/infranodus/exports/"*.json 2>/dev/null | head -n1 || true)"
+  fi
+  if [[ -z "${src}" || ! -f "${src}" ]]; then
+    echo "Usage: sf specify:infra <path-to-infranodus-export.json>"
+    echo "       (or place exports in ~/soulfield/workspace/data/infranodus/exports/ and run without args)"
+    return 2
+  fi
+  # Generate spec via Aiden wrapper; prints the new path
+  local OUT
+  OUT="$(node "$HOME/soulfield/tools/spec-from-infra.cjs" "$src")" || exit $?
+  echo "$OUT"
+  # Refresh index (best-effort)
+  sf index >/dev/null 2>&1 || true
+}

@@ -1,0 +1,26 @@
+# run @ 2025-08-28T15:10:06.421Z  (cwd:/home/michael/soulfield)
+
+$ echo "scaffold Soulfield GUI folders"
+scaffold Soulfield GUI folders
+
+$ mkdir -p /home/michael/soulfield/soulfield-gui/src/{shell,tabs,services,components,utils,assets,config}
+
+$ mkdir -p /home/michael/soulfield/soulfield-gui/src/tabs/{Projects,Sessions,Agents,Commands,Memory,Specs,Logs,Settings,MCP}
+
+$ touch /home/michael/soulfield/soulfield-gui/README.md
+
+$ touch /home/michael/soulfield/soulfield-gui/src/shell/{AppShell,NavRail,StatusBar}.placeholder
+
+$ touch /home/michael/soulfield/soulfield-gui/src/components/{Editor,DataTable,Terminal,TruthLensFlag}.placeholder
+
+$ ls -la /home/michael/soulfield/soulfield-gui/src
+total 36
+drwxrwxr-x  9 michael michael 4096 Aug 28 16:10 .
+drwxrwxr-x  3 michael michael 4096 Aug 28 16:10 ..
+drwxrwxr-x  2 michael michael 4096 Aug 28 16:10 assets
+drwxrwxr-x  2 michael michael 4096 Aug 28 16:10 components
+drwxrwxr-x  2 michael michael 4096 Aug 28 16:10 config
+drwxrwxr-x  2 michael michael 4096 Aug 28 16:10 services
+drwxrwxr-x  2 michael michael 4096 Aug 28 16:10 shell
+drwxrwxr-x 11 michael michael 4096 Aug 28 16:10 tabs
+drwxrwxr-x  2 michael michael 4096 Aug 28 16:10 utils

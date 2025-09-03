@@ -1,0 +1,31 @@
+# run @ 2025-08-25T19:57:10.778Z  (cwd:/home/michael/soulfield)
+
+$ echo "=== UK Marketplace MVP Workspace Check ==="
+=== UK Marketplace MVP Workspace Check ===
+
+$ ls -la ./legal/
+total 24
+drwxrwxr-x  2 michael michael 4096 Aug 25 20:53 .
+drwxrwxr-x 15 michael michael 4096 Aug 25 17:01 ..
+-rw-rw-r--  1 michael michael  682 Aug 25 20:52 cookies.md
+-rw-rw-r--  1 michael michael  682 Aug 25 20:51 privacy.md
+-rw-rw-r--  1 michael michael  509 Aug 25 20:53 returns.md
+-rw-rw-r--  1 michael michael  594 Aug 25 20:53 terms.md
+
+$ head -n 5 ./requirements.txt
+Requirements placeholder
+
+$ head -n 5 ./maker-agreement-template.md
+head: cannot open './maker-agreement-template.md' for reading: No such file or directory
+
+$ head -n 5 ./.env.example
+head: cannot open './.env.example' for reading: No such file or directory
+
+$ head -n 3 ./config/stripe_uk.env
+head: cannot open './config/stripe_uk.env' for reading: No such file or directory
+
+$ head -n 5 ./public/index.html
+head: cannot open './public/index.html' for reading: No such file or directory
+
+$ head -n 3 ./inventory/*.json
+head: cannot open './inventory/*.json' for reading: No such file or directory

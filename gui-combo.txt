@@ -1,0 +1,49 @@
+You are Aiden operating through TruthLens (structure/no-simulation). Goal: design the Soulfield OS GUI (local-first). Do NOT write code. Produce only architecture and UX artifacts.
+
+Context
+- OS: Ubuntu, fully local (no cloud desktop apps).
+- Backend: Node service on http://127.0.0.1:8790 (backend/index.cjs).
+- Core: council.js (agent router), jobs.js (command router), truthLens.js (filter), Pinecone memory adapter at services/memory/memory-pinecone.cjs.
+- CLI: sf research | sf specify | sf dry | sf apply --apply | sf log.
+- Tabs desired: Projects, Sessions (time travel), Agents (prompt editor), Commands (buttons for sf*), Memory (search/inspect), Specs (markdown editor/preview), Logs, Settings (ports/keys), MCP (RO server mgmt).
+- Inspirations: Claudia/Gooey (visual projects & reusable agents; session time travel), Claude Code Usage Monitor (token/cost analytics), Crystal (lightweight analytics polish).
+
+Deliverables (no code, concise, numbered)
+1) UI Architecture & File Map
+   - One-window layout (left nav or top tabs), primary panes, and component responsibilities.
+   - Proposed folders/files for the GUI project (e.g., app shell, tabs, services, state), with 1-line purpose each.
+2) Text Wireframes (ASCII)
+   - For each tab (Projects, Sessions, Agents, Commands, Memory, Specs, Logs, Settings, MCP):
+     * Layout zones (Header | Left Nav | Main | Right Pane).
+     * Key components (lists/tables/editors/charts/buttons).
+     * Primary actions (exact button labels).
+     * Empty/loading/error states + 3–4 keyboard shortcuts.
+3) API Contract (backend <-> GUI, localhost only)
+   - METHOD, PATH, request JSON, response JSON, error shape for:
+     * /api/research (topic)
+     * /api/specify
+     * /api/dry
+     * /api/apply (apply: true|false)
+     * /api/logs/latest
+     * /api/sessions [list,get,branch]
+     * /api/agents [list,get,save]
+     * /api/memory/query and /api/memory/upsert
+     * /mcp/tools and /mcp/call (proxy to read-only MCP at :8791)
+     * /usage/stats (tokens, cost per session/agent/day)
+   - Include pagination where relevant, idempotency notes, and security (localhost + x-api-token).
+4) 3-Phase Build Plan (no code)
+   - Phase 1 (Scaffold): runtime choice (Tauri/Electron), app shell, tab routes, health check.
+   - Phase 2 (MVP): Commands tab calling API; Specs viewer/editor; Logs tail; Sessions list; basic Agents editor.
+   - Phase 3 (Enhance): Session time travel (checkpoints/branch/diff), analytics dashboard, MCP panel, memory inspector/upsert, guardrails & confirmations.
+   - For each task: goal, inputs/outputs, success criteria, risks/mitigations.
+
+Non-functional requirements to honor
+- Privacy/local-first (no telemetry), safety gates (manual confirm before apply), performance (fast startup), resilience (clear errors and retry), accessibility (keyboard nav), and TruthLens visibility (show passed/failed lens flags on relevant screens).
+
+Acceptance Criteria
+- Bullet list of observable behaviors the GUI must satisfy to be considered “done” for MVP.
+
+Constraints
+- Backend surface is the existing service and CLI; GUI calls local HTTP only.
+- All Claude usage is via Aiden -> TruthLens; do not assume direct model access from the GUI.
+- Keep deliverables implementation-agnostic, no code.

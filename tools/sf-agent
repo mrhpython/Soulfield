@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$HOME/soulfield"
+LOGDIR="$ROOT/workspace/logs/agents"
+mkdir -p "$LOGDIR"
+
+log() { # event payload_json
+  ts=$(date +%s%3N)
+  echo "{\"ts\":$ts,\"event\":\"$1\",\"payload\":$2}" >> "$LOGDIR/$(date +%Y%m%d).jsonl"
+}
+
+usage() {
+  cat <<EOF
+Usage:
+  sf-agent list
+  sf-agent auto "brief with optional URL"
+  sf-agent run <name> '<json payload>'
+
+Examples:
+  sf-agent list
+  sf-agent auto "do a compliant scrape on https://bbc.co.uk/news"
+  sf-agent run jina '{"query":"find TruthLens docs"}'
+EOF
+}
+
+cmd="${1:-}"; shift || true
+case "$cmd" in
+  list)
+    node -e "const m=require('$ROOT/backend/agents/manager.cjs'); console.table(m.listAgents())"
+    ;;
+  auto)
+    brief="${*:-}"
+    [ -n "$brief" ] || { usage; exit 2; }
+    out=$(node -e "const m=require('$ROOT/backend/agents/manager.cjs'); m.autoRoute({brief:process.argv[1]}).then(x=>console.log(JSON.stringify(x)))" "$brief")
+    echo "$out" | jq .
+    log "agent.auto" "$(jq -c --arg brief "$brief" '{brief:$brief, result:(input|fromjson)}' <<<"$out")"
+    ;;
+  run)
+    name="${1:-}"; shift || true
+    payload="${1:-}"
+    [ -n "$name" ] && [ -n "$payload" ] || { usage; exit 2; }
+    out=$(node -e "const m=require('$ROOT/backend/agents/manager.cjs'); m.run('$name', JSON.parse(process.argv[1])).then(x=>console.log(JSON.stringify(x)))" "$payload")
+    echo "$out" | jq .
+    log "agent.run" "$(jq -c --arg name "$name" '{name:$name, input:(input|fromjson)}' <<<"$payload")"
+    ;;
+  *)
+    usage; exit 2;;
+esac

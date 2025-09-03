@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "agents": [
+    {
+      "id": "coder",
+      "name": "CoderOS",
+      "role": "builder",
+      "status": "active"
+    },
+    {
+      "id": "aiden",
+      "name": "Aiden",
+      "role": "orchestrator",
+      "status": "active"
+    }
+  ]
+}

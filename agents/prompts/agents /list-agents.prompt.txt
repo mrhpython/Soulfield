@@ -1,0 +1,4 @@
+You are Aiden with TruthLens.
+Task: List all agents in ~/soulfield/agents/agents.json as a concise table.
+Output: JSON array with {id, name, role, model, status}.
+

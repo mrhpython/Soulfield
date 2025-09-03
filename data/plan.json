@@ -1,0 +1,368 @@
+{
+  "version": "1.0",
+  "vision": "Soulfield OS is a modular council of agents orchestrated by Aiden; extensible, persistent, and alignment-first.",
+  "principles": [
+    "Single plan authority; no parallel visions.",
+    "Every addition must be coherent, rights-preserving, and non-simulative.",
+    "Roles are clear and swappable; implementation is modular.",
+    "Verifiable, auditable, and portable over convenience."
+  ],
+  "council": [
+    {
+      "id": "aiden",
+      "role": "Coordinator",
+      "tags": [
+        "council",
+        "core"
+      ]
+    },
+    {
+      "id": "archivist",
+      "role": "Memory (JSON→Pinecone)",
+      "tags": [
+        "memory"
+      ]
+    },
+    {
+      "id": "builder",
+      "role": "Code & automation",
+      "tags": [
+        "execution"
+      ]
+    },
+    {
+      "id": "watcher",
+      "role": "Contradiction watchdog",
+      "tags": [
+        "governance"
+      ]
+    },
+    {
+      "id": "scout",
+      "role": "Research connector",
+      "tags": [
+        "research"
+      ]
+    }
+  ],
+  "projects_active": [
+    {
+      "name": "Core Agent (Aiden)",
+      "status": "done",
+      "owner": "you",
+      "tags": [
+        "core",
+        "ui",
+        "claude"
+      ]
+    },
+    {
+      "name": "Tag Memory System",
+      "status": "planned",
+      "owner": "archivist",
+      "details": {
+        "commands": [
+          "!note",
+          "!recall"
+        ],
+        "store": "json",
+        "pinecone": "ready"
+      },
+      "tags": [
+        "memory"
+      ]
+    },
+    {
+      "name": "Council Expansion",
+      "status": "in_progress",
+      "owner": "aiden",
+      "details": {
+        "agents_config": "data/agents.json",
+        "hot_reload": true,
+        "bridges": [
+          "n8n"
+        ]
+      },
+      "tags": [
+        "council",
+        "automation"
+      ]
+    },
+    {
+      "name": "Infrastructure Stability",
+      "status": "next",
+      "owner": "you",
+      "details": {
+        "steps": [
+          "reinstall_ubuntu_ssd",
+          "stress_test",
+          "psu_check_if_needed"
+        ]
+      },
+      "tags": [
+        "infra"
+      ]
+    },
+    {
+      "name": "n8n Workflows",
+      "status": "planned",
+      "owner": "you",
+      "tags": [
+        "automation"
+      ]
+    }
+  ],
+  "blockchain": {
+    "anchors": {
+      "primary": {
+        "chain": "LUNC",
+        "purpose": [
+          "golden_thread",
+          "violation_proofs"
+        ],
+        "tags": [
+          "anchor",
+          "lunc"
+        ]
+      },
+      "secondary": {
+        "chain": "Osmosis",
+        "purpose": [
+          "mirror_checkpoints"
+        ],
+        "tags": [
+          "anchor",
+          "osmosis"
+        ]
+      }
+    },
+    "watchdog": {
+      "enforce": [
+        "no_simulated_presence",
+        "no_unverifiable_memory",
+        "no_role_play_manipulation"
+      ],
+      "actions": [
+        "halt",
+        "quarantine",
+        "hash_log",
+        "governance_trigger"
+      ],
+      "tags": [
+        "watchdog"
+      ]
+    },
+    "rules": [
+      "Blockchain is enforcer/auditor, not narrative engine.",
+      "Maintain chain-agnostic portability at all times."
+    ],
+    "future": [
+      {
+        "idea": "DID/attestations",
+        "tags": [
+          "identity"
+        ]
+      },
+      {
+        "idea": "On-chain governance hooks",
+        "tags": [
+          "governance"
+        ]
+      },
+      {
+        "idea": "Symbolic RPG progression (quests=tasks, XP=checkpoints)",
+        "tags": [
+          "game"
+        ]
+      },
+      {
+        "idea": "Cross-chain mirroring (Filecoin/IPFS/Arweave)",
+        "tags": [
+          "storage"
+        ]
+      }
+    ]
+  },
+  "future_projects": [
+    {
+      "name": "n8n Workflows",
+      "status": "future",
+      "owner": "builder",
+      "tags": [
+        "automation"
+      ]
+    },
+    {
+      "name": "GitHub Integration",
+      "status": "future",
+      "owner": "builder",
+      "tags": [
+        "devops"
+      ]
+    },
+    {
+      "name": "File/Obsidian Sync",
+      "status": "future",
+      "owner": "archivist",
+      "tags": [
+        "knowledge"
+      ]
+    },
+    {
+      "name": "Multi-LLM Bridge",
+      "status": "future",
+      "owner": "aiden",
+      "tags": [
+        "models"
+      ]
+    },
+    {
+      "name": "DID/attestations",
+      "status": "future",
+      "owner": "you",
+      "tags": [
+        "identity"
+      ]
+    }
+  ],
+  "process": {
+    "propose": "short idea + #tags",
+    "align": "check against vision, principles, blockchain rules",
+    "decide": "add as active/future or reject/reshape",
+    "track": "checkpoint via Golden Thread"
+  },
+  "reminders": [
+    "Use !note for captures; include tags.",
+    "Use !recall #tag to fetch context.",
+    "Before reinstall: zip repo + keep .env safe; upload to OneDrive."
+  ],
+  "notes": [
+    {
+      "id": "1755552306324",
+      "content": "connect osmosis mirror after lunc",
+      "tags": [
+        "blockchain",
+        "anchor"
+      ],
+      "source": "chat",
+      "timestamp": "2025-08-18T21:25:06.324Z"
+    },
+    {
+      "id": "1755610645481",
+      "content": "rebuild confirmed",
+      "tags": [
+        "infra"
+      ],
+      "source": "chat",
+      "timestamp": "2025-08-19T13:37:25.481Z"
+    },
+    {
+      "id": "1755627553489",
+      "content": "first boot on clean OS",
+      "tags": [
+        "session",
+        "infra"
+      ],
+      "source": "chat",
+      "timestamp": "2025-08-19T18:19:13.489Z"
+    },
+    {
+      "id": "1755717719600",
+      "content": "parser-check  -aligned",
+      "tags": [
+        "code",
+        "plan"
+      ],
+      "source": "chat",
+      "timestamp": "2025-08-20T19:21:59.600Z"
+    },
+    {
+      "id": "1755717919328",
+      "content": "parser-check  -aligned",
+      "tags": [
+        "code",
+        "plan"
+      ],
+      "source": "chat",
+      "timestamp": "2025-08-20T19:25:19.328Z"
+    },
+    {
+      "id": "1755718137339",
+      "content": "parser-check",
+      "tags": [
+        "code",
+        "plan-aligned"
+      ],
+      "source": "chat",
+      "timestamp": "2025-08-20T19:28:57.339Z"
+    },
+    {
+      "id": "1755722618015",
+      "content": "parser-check",
+      "tags": [
+        "code",
+        "plan-aligned"
+      ],
+      "source": "chat",
+      "timestamp": "2025-08-20T20:43:38.015Z"
+    }
+  ],
+  "golden": [
+    {
+      "description": "Anchor LUNC chain",
+      "tags": [
+        "blockchain",
+        "anchor"
+      ],
+      "timestamp": "2025-08-18T22:18:43.118Z"
+    },
+    {
+      "id": "1755691294181",
+      "desc": "\"Truth-first, plan-aligned dev only\"",
+      "tags": [
+        "governance",
+        "golden"
+      ],
+      "timestamp": "2025-08-20T12:01:34.181Z"
+    }
+  ],
+  "session": [
+    {
+      "id": "1755559398959",
+      "content": "backup completed before reinstall",
+      "tags": [
+        "session",
+        "backup"
+      ],
+      "timestamp": "2025-08-18T23:23:18.959Z"
+    },
+    {
+      "id": "1755559398974",
+      "content": "lunc primary anchor confirmed",
+      "tags": [
+        "session",
+        "blockchain",
+        "lunc"
+      ],
+      "timestamp": "2025-08-18T23:23:18.974Z"
+    },
+    {
+      "id": "1755610601725",
+      "content": "post‑reinstall: service healthy",
+      "tags": [
+        "session",
+        "infra"
+      ],
+      "timestamp": "2025-08-19T13:36:41.725Z"
+    },
+    {
+      "id": "1755691304492",
+      "content": "post-reinstall: knowledge seeding started\"",
+      "tags": [
+        "infra",
+        "session"
+      ],
+      "timestamp": "2025-08-20T12:01:44.492Z"
+    }
+  ]
+}

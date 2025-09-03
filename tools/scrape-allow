@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+CFG="$HOME/soulfield/backend/services/scraper/config/allowlist.yaml"
+dom="${1:-}"; [ -n "$dom" ] || { echo "usage: scrape-allow <domain>"; exit 2; }
+grep -qxF "$dom" "$CFG" || echo "$dom" >> "$CFG"
+echo "Allowlisted: $dom"

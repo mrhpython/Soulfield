@@ -1,0 +1,12 @@
+     * /api/specify
+     * /api/dry
+     * /api/apply (apply: true|false)
+     * /api/logs/latest
+     * /api/sessions [list,get,branch]
+     * /api/agents [list,get,save]
+     * /api/memory/query and /api/memory/upsert
+     * /mcp/tools and /mcp/call (proxy to read-only MCP at :8791)
+     * /usage/stats (tokens, cost per session/agent/day)
+   - Include pagination where relevant, idempotency notes, and security (localhost + x-api-token).
+4) 3-Phase Build Plan (no code)
+   - Phase 1 (Scaffold): runtime choice (Tauri/Electron), app shell, tab routes, health check.

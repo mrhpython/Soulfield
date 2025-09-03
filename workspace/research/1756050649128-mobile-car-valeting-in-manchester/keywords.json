@@ -1,0 +1,189 @@
+{
+  "schema": {
+    "keyword": "string",
+    "intent": "info|nav|comm|trans",
+    "difficulty": 1,
+    "volume_est": 1,
+    "cpc_est": 0,
+    "cluster": "string",
+    "priority": 1
+  },
+  "items": [
+    {
+      "keyword": "mobile car valeting manchester",
+      "intent": "commercial",
+      "difficulty": "medium",
+      "volume_est": 880,
+      "cluster": "core",
+      "priority": 10
+    },
+    {
+      "keyword": "mobile car wash manchester",
+      "intent": "commercial",
+      "difficulty": "medium",
+      "volume_est": 720,
+      "cluster": "core",
+      "priority": 8
+    },
+    {
+      "keyword": "car detailing manchester",
+      "intent": "commercial",
+      "difficulty": "high",
+      "volume_est": 1900,
+      "cluster": "detailing",
+      "priority": 10
+    },
+    {
+      "keyword": "mobile car cleaning service near me",
+      "intent": "transactional",
+      "difficulty": "low",
+      "volume_est": 390,
+      "cluster": "core",
+      "priority": 6
+    },
+    {
+      "keyword": "car valeting prices manchester",
+      "intent": "commercial",
+      "difficulty": "low",
+      "volume_est": 210,
+      "cluster": "pricing",
+      "priority": 6
+    },
+    {
+      "keyword": "best mobile car valet manchester",
+      "intent": "commercial",
+      "difficulty": "medium",
+      "volume_est": 140,
+      "cluster": "core",
+      "priority": 4
+    },
+    {
+      "keyword": "car wash home service manchester",
+      "intent": "transactional",
+      "difficulty": "low",
+      "volume_est": 170,
+      "cluster": "core",
+      "priority": 6
+    },
+    {
+      "keyword": "mobile car detailing near me",
+      "intent": "transactional",
+      "difficulty": "medium",
+      "volume_est": 590,
+      "cluster": "detailing",
+      "priority": 8
+    },
+    {
+      "keyword": "eco car wash manchester",
+      "intent": "commercial",
+      "difficulty": "low",
+      "volume_est": 90,
+      "cluster": "eco",
+      "priority": 4
+    },
+    {
+      "keyword": "luxury car detailing manchester",
+      "intent": "commercial",
+      "difficulty": "medium",
+      "volume_est": 110,
+      "cluster": "detailing",
+      "priority": 4
+    },
+    {
+      "keyword": "mobile car valet same day",
+      "intent": "transactional",
+      "difficulty": "low",
+      "volume_est": 70,
+      "cluster": "core",
+      "priority": 4
+    },
+    {
+      "keyword": "car cleaning at work manchester",
+      "intent": "commercial",
+      "difficulty": "low",
+      "volume_est": 50,
+      "cluster": "core",
+      "priority": 2
+    },
+    {
+      "keyword": "waterless car wash manchester",
+      "intent": "informational",
+      "difficulty": "low",
+      "volume_est": 40,
+      "cluster": "eco",
+      "priority": 2
+    },
+    {
+      "keyword": "ceramic coating manchester",
+      "intent": "commercial",
+      "difficulty": "medium",
+      "volume_est": 320,
+      "cluster": "core",
+      "priority": 6
+    },
+    {
+      "keyword": "car interior cleaning manchester",
+      "intent": "commercial",
+      "difficulty": "medium",
+      "volume_est": 260,
+      "cluster": "core",
+      "priority": 6
+    },
+    {
+      "keyword": "mobile car valet didsbury",
+      "intent": "transactional",
+      "difficulty": "low",
+      "volume_est": 30,
+      "cluster": "core",
+      "priority": 2
+    },
+    {
+      "keyword": "mobile car wash salford",
+      "intent": "transactional",
+      "difficulty": "low",
+      "volume_est": 90,
+      "cluster": "core",
+      "priority": 4
+    },
+    {
+      "keyword": "car valeting stockport",
+      "intent": "commercial",
+      "difficulty": "medium",
+      "volume_est": 480,
+      "cluster": "core",
+      "priority": 8
+    },
+    {
+      "keyword": "mobile alloy wheel refurbishment manchester",
+      "intent": "commercial",
+      "difficulty": "low",
+      "volume_est": 60,
+      "cluster": "core",
+      "priority": 4
+    },
+    {
+      "keyword": "fleet car cleaning manchester",
+      "intent": "commercial",
+      "difficulty": "low",
+      "volume_est": 40,
+      "cluster": "fleet",
+      "priority": 2
+    },
+    {
+      "keyword": "monthly car wash subscription manchester",
+      "intent": "commercial",
+      "difficulty": "low",
+      "volume_est": 20,
+      "cluster": "core",
+      "priority": 2
+    },
+    {
+      "keyword": "steam car cleaning manchester",
+      "intent": "commercial",
+      "difficulty": "low",
+      "volume_est": 30,
+      "cluster": "core",
+      "priority": 2
+    }
+  ]
+}

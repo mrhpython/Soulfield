@@ -1,0 +1,43 @@
+const fs = require("fs"); const path = require("path");
+const { askAiden } = require("./aiden.cjs");
+const ROOT = path.resolve(__dirname, "..");
+const RDIR = path.join(ROOT, "workspace", "research");
+const SDIR = path.join(ROOT, ".agent-os", "specs");
+fs.mkdirSync(SDIR, { recursive: true });
+
+function newestResearch() {
+  if (!fs.existsSync(RDIR)) return null;
+  const dirs = fs.readdirSync(RDIR).filter(d => fs.statSync(path.join(RDIR,d)).isDirectory()).sort().reverse();
+  return dirs.length ? path.join(RDIR, dirs[0]) : null;
+}
+
+(async () => {
+  const src = process.argv[2] ? path.join(RDIR, process.argv[2]) : newestResearch();
+  if (!src || !fs.existsSync(src)) { console.error("research folder not found. usage: node tools/spec-from-research.cjs <research-id>"); process.exit(2); }
+
+  const research = fs.readFileSync(path.join(src, "research.md"), "utf8");
+  const keywords = fs.existsSync(path.join(src,"keywords.json")) ? fs.readFileSync(path.join(src,"keywords.json"),"utf8") : "[]";
+
+  const system = "You are a senior product builder. Produce a tight spec.md for a 1-week MVP.";
+  const user = `Create spec.md with:
+- Intent & Acceptance Criteria
+- MVP (thin slice)
+- ≤12 tasks
+- Metrics for week 1
+- ## Run (approved) with ONLY: echo|ls|cat|head
+
+=== RESEARCH ===
+${research}
+
+=== KEYWORDS JSON ===
+${keywords}`;
+
+  const spec = await askAiden({ system, messages:[{role:"user", content:user}] });
+
+  const slug = path.basename(src).split("-").slice(1).join("-") || "pop-up";
+  const dir = path.join(SDIR, `${Date.now()}-${slug}`);
+  fs.mkdirSync(dir, { recursive: true });
+  const specPath = path.join(dir, "spec.md");
+  fs.writeFileSync(specPath, spec);
+  console.log(specPath);
+})().catch(e => { console.error(e.stack||e); process.exit(1); });

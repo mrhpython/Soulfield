@@ -1,0 +1,14 @@
+   - Phase 2 (MVP): Commands tab calling API; Specs viewer/editor; Logs tail; Sessions list; basic Agents editor.
+   - Phase 3 (Enhance): Session time travel (checkpoints/branch/diff), analytics dashboard, MCP panel, memory inspector/upsert, guardrails & confirmations.
+   - For each task: goal, inputs/outputs, success criteria, risks/mitigations.
+
+Non-functional requirements to honor
+- Privacy/local-first (no telemetry), safety gates (manual confirm before apply), performance (fast startup), resilience (clear errors and retry), accessibility (keyboard nav), and TruthLens visibility (show passed/failed lens flags on relevant screens).
+
+Acceptance Criteria
+- Bullet list of observable behaviors the GUI must satisfy to be considered “done” for MVP.
+
+Constraints
+- Backend surface is the existing service and CLI; GUI calls local HTTP only.
+- All Claude usage is via Aiden -> TruthLens; do not assume direct model access from the GUI.
+- Keep deliverables implementation-agnostic, no code.

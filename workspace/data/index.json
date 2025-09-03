@@ -1,0 +1,258 @@
+{
+  "generated": 1756152198911,
+  "count": 30,
+  "items": [
+    {
+      "path": "workspace/product/README.md",
+      "size": 15,
+      "mtime": 1756049358951.6343,
+      "title": "product zone",
+      "tags": [],
+      "hash": "91d7998a39bc4bf3f74b057042f6e985"
+    },
+    {
+      "path": "workspace/product/plan.md",
+      "size": 3412,
+      "mtime": 1755549772000,
+      "title": "Soulfield OS — Project Plan",
+      "tags": [],
+      "hash": "41bd5e3f57d8b9f3d16a611b0e29c38c"
+    },
+    {
+      "path": "workspace/research/1756050649128-mobile-car-valeting-in-manchester/competitors.md",
+      "size": 2123,
+      "mtime": 1756056929012.455,
+      "title": "Competitor Analysis",
+      "tags": [
+        "car-care",
+        "competitor",
+        "manchester"
+      ],
+      "hash": "ec18f87d948f6ca2155d97a7842f7020"
+    },
+    {
+      "path": "workspace/research/1756050649128-mobile-car-valeting-in-manchester/keywords.json",
+      "size": 4446,
+      "mtime": 1756056929011.4548,
+      "title": "keywords.json",
+      "tags": [],
+      "hash": "3e49540a8b0200b2bd0046683a976d3b"
+    },
+    {
+      "path": "workspace/research/1756050649128-mobile-car-valeting-in-manchester/plan.md",
+      "size": 5283,
+      "mtime": 1756056929012.455,
+      "title": "plan.md",
+      "tags": [
+        "sprint",
+        "mvp"
+      ],
+      "hash": "0d4bb218708d629291042fc7ad27f5ac"
+    },
+    {
+      "path": "workspace/research/1756050649128-mobile-car-valeting-in-manchester/research.md",
+      "size": 7144,
+      "mtime": 1756056929012.455,
+      "title": "research.md",
+      "tags": [
+        "car-care",
+        "mobile-services",
+        "manchester",
+        "mvp"
+      ],
+      "hash": "55a083fc957735de7291b56c9d8c3a2f"
+    },
+    {
+      "path": "workspace/research/1756060016868-online-business-ideas-uk/keywords.json",
+      "size": 3902,
+      "mtime": 1756060114331.0981,
+      "title": "keywords.json",
+      "tags": [],
+      "hash": "eb9240933be2acdb9661e133524bf478"
+    },
+    {
+      "path": "workspace/research/1756060016868-online-business-ideas-uk/research.md",
+      "size": 12364,
+      "mtime": 1756060114330.0981,
+      "title": "1) research.md",
+      "tags": [],
+      "hash": "a0a7d788e586f44fec0442d928776e2c"
+    },
+    {
+      "path": "workspace/research/1756060424517-online-business-ideas-uk/keywords.json",
+      "size": 3826,
+      "mtime": 1756060511972.842,
+      "title": "keywords.json",
+      "tags": [],
+      "hash": "bfa82203a890ce75cd1bad802bdf945a"
+    },
+    {
+      "path": "workspace/research/1756060424517-online-business-ideas-uk/research.md",
+      "size": 11927,
+      "mtime": 1756060511971.842,
+      "title": "1) research.md",
+      "tags": [],
+      "hash": "8969b60f2e30459c12c31e6dc5feb9ae"
+    },
+    {
+      "path": "workspace/research/1756072293111-integrate-https-github-com-wshobson-agents-as-agent-as-too/keywords.json",
+      "size": 1054,
+      "mtime": 1756072346816.8494,
+      "title": "keywords.json",
+      "tags": [],
+      "hash": "57fefbe419855412460f33c82813c824"
+    },
+    {
+      "path": "workspace/research/1756072293111-integrate-https-github-com-wshobson-agents-as-agent-as-too/research.md",
+      "size": 7919,
+      "mtime": 1756072346815.849,
+      "title": "research.md",
+      "tags": [],
+      "hash": "120d825023586a03000de57ebe3067a5"
+    },
+    {
+      "path": "workspace/research/1756072547771-infranodus-integration-for-content-gaps-https-infranodus/keywords.json",
+      "size": 357,
+      "mtime": 1756072647249.163,
+      "title": "keywords.json",
+      "tags": [],
+      "hash": "c5528bcf5719bfea5db40c87d7b9dc99"
+    },
+    {
+      "path": "workspace/research/1756072547771-infranodus-integration-for-content-gaps-https-infranodus/research.md",
+      "size": 6704,
+      "mtime": 1756072647248.163,
+      "title": "research.md",
+      "tags": [],
+      "hash": "c5f7b03f80ec3e4bbe33875b47ea0a97"
+    },
+    {
+      "path": "workspace/research/1756072775834-bright-data-scraping-browser-integration-https-brightdata/keywords.json",
+      "size": 1012,
+      "mtime": 1756072876478.5654,
+      "title": "keywords.json",
+      "tags": [],
+      "hash": "23ccf01689a517b44533d115cd719bc5"
+    },
+    {
+      "path": "workspace/research/1756072775834-bright-data-scraping-browser-integration-https-brightdata/research.md",
+      "size": 6476,
+      "mtime": 1756072876477.5654,
+      "title": "research.md",
+      "tags": [],
+      "hash": "5194a940f0846bc28c9ee76ef02d9305"
+    },
+    {
+      "path": "workspace/research/1756073037056-jina-ai-for-retrieval-rerank-over-workspace-docs-https-do/keywords.json",
+      "size": 1267,
+      "mtime": 1756073092656.9504,
+      "title": "keywords.json",
+      "tags": [],
+      "hash": "ad1fffd8b5d4385d8a526496142820ba"
+    },
+    {
+      "path": "workspace/research/1756073037056-jina-ai-for-retrieval-rerank-over-workspace-docs-https-do/research.md",
+      "size": 7401,
+      "mtime": 1756073092655.9504,
+      "title": "research.md",
+      "tags": [],
+      "hash": "6a551a06bd9bcdd757a263a24d5b0ef7"
+    },
+    {
+      "path": "workspace/research/README.md",
+      "size": 16,
+      "mtime": 1756049358951.6343,
+      "title": "research zone",
+      "tags": [],
+      "hash": "cad3643bc4676e873c7048c3e6ac1339"
+    },
+    {
+      "path": "workspace/knowledge/README.md",
+      "size": 206,
+      "mtime": 1756135623145.5522,
+      "title": "Knowledge Zone",
+      "tags": [],
+      "hash": "af72c4936158adda38c099624a5bac38"
+    },
+    {
+      "path": "workspace/knowledge/TruthLens.md",
+      "size": 1262,
+      "mtime": 1756074724769.918,
+      "title": "TruthLens — Policy & Guardrails",
+      "tags": [],
+      "hash": "e60486f5d5f5a0ed3980a633050e0305"
+    },
+    {
+      "path": "workspace/knowledge/UK-Online-Compliance.md",
+      "size": 2593,
+      "mtime": 1756135606951.9216,
+      "title": "UK Online Compliance – Starter Pack (Living Document)",
+      "tags": [],
+      "hash": "75f9c6d67841187d65d8f74aad9c270f"
+    },
+    {
+      "path": "workspace/recaps/README.md",
+      "size": 14,
+      "mtime": 1756049358951.6343,
+      "title": "recaps zone",
+      "tags": [],
+      "hash": "6c51d85439d0fe2d6104ced70a567614"
+    },
+    {
+      "path": "workspace/docs/README.md",
+      "size": 12,
+      "mtime": 1756049358951.6343,
+      "title": "docs zone",
+      "tags": [],
+      "hash": "e1d89393ff473a164e191525e1680846"
+    },
+    {
+      "path": "workspace/docs/STATUS.md",
+      "size": 4995,
+      "mtime": 1755800259922.5535,
+      "title": "Soulfield — Ops Status (Local)",
+      "tags": [],
+      "hash": "fbc89293b7176d622063cefa333a23ed"
+    },
+    {
+      "path": "workspace/data/README.md",
+      "size": 12,
+      "mtime": 1756049358951.6343,
+      "title": "data zone",
+      "tags": [],
+      "hash": "d49f2eed342a31c7e7f222b47cbb417a"
+    },
+    {
+      "path": "workspace/data/index.json",
+      "size": 7866,
+      "mtime": 1756137141773.1404,
+      "title": "index.json",
+      "tags": [],
+      "hash": "53551195f8cca69168d8c93bf2c6da86"
+    },
+    {
+      "path": "workspace/data/infranodus/1756075923261-content-gap-demo.json",
+      "size": 95,
+      "mtime": 1756075923260.3542,
+      "title": "1756075923261-content-gap-demo.json",
+      "tags": [],
+      "hash": "d8f16a9dc82abe7a7988ec71dadd16ff"
+    },
+    {
+      "path": "workspace/data/infranodus/exports/1756123456789-infra.result.json",
+      "size": 273572,
+      "mtime": 1756131201064.7866,
+      "title": "1756123456789-infra.result.json",
+      "tags": [],
+      "hash": "aec185d931f22d7e50f2e5effd1fd00c"
+    },
+    {
+      "path": "workspace/data/infranodus/incoming/1756118816090-demo content gaps.pending.json",
+      "size": 72915,
+      "mtime": 1756118816089.5225,
+      "title": "1756118816090-demo content gaps.pending.json",
+      "tags": [],
+      "hash": "b5ade89829dbbe5aface035191037139"
+    }
+  ]
+}

@@ -1,0 +1,231 @@
+Love it—let’s lock a clear plan so you (and agents) can run this end‑to‑end without guessing.
+
+What you already have (working)
+
+Infra → Spec pipeline (manual export path):
+
+Export JSON from InfraNodus → workspace/data/infranodus/exports/…
+
+sf specify:infra → generates spec.md (now passes TruthLens checks)
+
+Compliance layer: legal docs + checker + whitelist (green ✅)
+
+Agent skeleton: aiden (Claude), scraper (Bright Data stub), jina (search/rerank stub), infranodus (import/parse scaffolds)
+
+Workspace layout: workspace/{research,specs,knowledge,data,…} and sf index
+
+Goal
+
+Finish the gap → research → spec → compliance → execution loop, make it repeatable, and wire in:
+
+InfraNodus (graph gaps)
+
+Bright Data (compliant scraping)
+
+Jina (semantic search/rerank)
+
+Claude (Aiden) (planning/spec writing)
+
+optional GraphRAG style memory over your workspace
+
+Architecture (simple & composable)
+Topics/Seeds ──► ingest (infra import …) ──► queue JSONL
+      ▲                                 │
+      │                                 ▼
+  Bright Data scrape ◄──────── router (agent:auto) ─► Jina search
+      │                                 │
+      └────► texts ► Infra API/export ► results/*.result.json
+                                         │
+                                         ▼
+                                sf specify:infra (Aiden)
+                                         │
+                                         ▼
+                              spec.md + compliance checks (sf dry/apply)
+
+
+Uploads/Downloads:
+
+Uploads (you): put CSV/MD/PDF/URLs via infra import …
+
+Downloads (from Infra web): infra export parse <file.json>
+
+Using Infra web vs API:
+
+Web: explore/visualise; export JSON → parse back in (already works).
+
+API: later flip a key and let infra analyze "topic" --batch N hit Infra directly.
+
+Plan (concrete steps)
+A) Finish InfraNodus “all inputs in” (you have most of this)
+
+Keep using:
+
+infra import md  ~/soulfield/workspace/research  research
+infra import md  ~/soulfield/workspace/specs     specs
+infra import url "https://example.com"            urls
+infra import plain "short note"                   notes
+
+
+When using Infra web UI:
+
+infra export parse ~/Downloads/infranodus-*.json <label>
+sf index
+sf specify:infra            # generates spec.md from newest export
+sf dry && sf apply --apply  # compliance-safe
+
+B) Bright Data scraper (compliant)
+
+Allowlist domains per command:
+
+scrape-allow example.com
+sf-agent auto "do a compliant scrape on https://example.com/page"
+
+
+Save outputs to workspace/data/scrapes/*.jsonl (already scaffolding).
+
+Later: add per‑site rate limits & robots.txt respect in backend/services/scraper/.
+
+C) Jina search/rerank (local first, cloud later)
+
+Phase 1 (stub usable now): returns placeholder results so routing works.
+
+Phase 2 (cloud): add .env keys and a tiny cache:
+
+JINA_API_KEY=…
+
+store results under workspace/data/jina/*.json
+
+D) GraphRAG-style loop (portable)
+
+Treat each Infra result as a graph snapshot.
+
+Create a simple workspace/data/graph/index.json:
+
+nodes = Infra nodes (top N per result)
+
+edges = Infra edges (lightweight)
+
+docs = references (paths in workspace)
+
+Use Jina to rerank index.json hits by query; include node IDs in Aiden prompts.
+
+CLI to build:
+
+cat > ~/soulfield/tools/graph-build <<'BASH'
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$HOME/soulfield/workspace/data/infranodus/results"
+OUT="$HOME/soulfield/workspace/data/graph"
+mkdir -p "$OUT"
+jq -s '
+  reduce .[] as $r (
+    {nodes:[], edges:[], labels:[]};
+    {
+      nodes: (.nodes + ($r.nodes // []) | unique),
+      edges: (.edges + ($r.edges // []) | unique),
+      labels: (.labels + [ $r.label ])
+    }
+  )
+' "$ROOT"/*.result.json > "$OUT/index.json"
+echo "$OUT/index.json"
+BASH
+chmod +x ~/soulfield/tools/graph-build
+
+
+Run:
+
+graph-build
+sf index
+
+E) Aiden prompts (ready to use)
+
+When you want integration ideas, drop one of these into sf agent:auto (or call Aiden directly):
+
+1) “Combine them all” ideation
+
+@aiden:
+Context: Soulfield OS with InfraNodus (graphs), Bright Data (compliant scraping), Jina (search/rerank), TruthLens policy, UK-only online businesses.
+Task: Propose 3 integration patterns that turn topic gaps into money within 7 days. For each, include:
+- Data flow (inputs→Infra→spec→execution)
+- Minimal scraping targets (allowlist)
+- Jina queries to validate demand
+- Compliance risks (UK) + mitigations
+- A spec.md skeleton with a whitelist-safe Run block
+
+
+2) Gap→Spec auto-pipeline
+
+@aiden:
+Given the latest InfraNodus result (use workspace/data/infranodus/results/newest),
+write a spec.md that:
+- Defines an online-only UK offer
+- Chooses a minimal scraping set (2 sources)
+- Lists 8 tasks (≤ 1 day each)
+- Includes a whitelist-safe Run block that checks legal docs + presence of landing page
+Return only the spec.md.
+
+
+3) GraphRAG idea
+
+@aiden:
+Use workspace/data/graph/index.json (nodes and edges) as memory.
+Propose how to cluster our ideas into 3 pop-up businesses and draft the highest-ROI spec first.
+
+
+(You can paste those directly into your chat UI or call the askAiden helper if you prefer programmatic.)
+
+Minimal API endpoints (optional, for a tiny web UI later)
+
+Expose three backend routes:
+
+GET /api/agents/list
+
+POST /api/agents/auto { brief }
+
+POST /api/infra/parse { filePath, label } → runs infra export parse
+
+POST /api/spec/from-infra { resultPath? } → runs the converter
+
+(You can add these to index.cjs in a small router; not required right now.)
+
+Security & policy
+
+Keep TruthLens + whitelist strict (no pipes/redirects).
+
+Add new commands one-by-one to backend/services/policy/config/whitelist.yaml.
+
+Bright Data: restrict by allowlist (tools/scrape-allow) and log every scrape under workspace/logs/agents/.
+
+What to do right now (90‑minute sprint)
+
+Parse a fresh Infra export and generate another spec:
+
+infra export parse ~/Downloads/<new-export>.json new-topic
+sf index
+sf specify:infra
+sf dry
+
+
+Build/update the graph index and test a Jina query stub:
+
+graph-build
+sf agent:run jina '{"query":"top opportunities for UK mobile services"}'
+
+
+Run a Bright Data demo scrape (allowed domain):
+
+scrape-allow bbc.co.uk
+sf-agent auto "do a compliant scrape on https://www.bbc.co.uk/news/technology"
+
+
+Pick one spec and move it to execution (it already passes compliance).
+
+If you want, I can paste the exact code to:
+
+call Jina with a real API key,
+
+call InfraNodus with API (not just exports),
+
+and expand the scraper to save normalized text fields for Infra ingest.
+
+Which one do you want wired first: Infra API, Jina live, or Bright Data hardened?

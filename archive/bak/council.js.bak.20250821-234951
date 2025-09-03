@@ -1,0 +1,61 @@
+const AIDEN_MODEL = process.env.AIDEN_MODEL || "claude-opus-4-1-20250805";
+const { applyTruthLens } = require("./truthLens.js");
+const aos = require("./tools/agentos-local.js");
+const axios = require("axios");
+
+function agents(){
+  try { delete require.cache[require.resolve("./data/agents.json")]; } catch {}
+  return require("./data/agents.json");
+}
+function pick(text){
+  text = (typeof text === "string") ? text : (text && text.text ? text.text : "");
+const m = text.match(/^@([\w-]+):\s*(.*)$/s);
+  const list = agents();
+  if(!m) return { id:"aiden", text, agent: list.find(a=>a.id==="aiden")||list[0] };
+  return { id:m[1], text:m[2]||"", agent: list.find(a=>a.id===m[1])||list[0] };
+}
+
+async function callClaude(system, user){
+  if(process.env.DEV_NO_API === "1"){
+    return "(dev offline)"; // never calls out
+  }
+  const r = await axios.post("https://api.anthropic.com/v1/messages", {
+    model: AIDEN_MODEL, max_tokens:800, temperature:0.2,
+    messages:[{role:"system",content:system||""},{role:"user",content:user}]
+  }, { headers:{ "x-api-key":process.env.CLAUDE_API_KEY, "anthropic-version":"2023-06-01" }, timeout:60000 });
+  return r.data?.content?.[0]?.text || "(no response)";
+}
+
+async function runWithCouncil(raw){
+  const gated = applyTruthLens(raw);
+  const { id, text, agent } = pick((gated const { id, text, agent } = pick(gated);const { id, text, agent } = pick(gated); gated.text) ? gated.text : gated);
+
+  if(id === "coder"){
+    // offline Agent‑OS commands
+    if(/^\/plan-product\b/i.test(text)) {
+      const title = text.replace(/^\/plan-product\s*/i,"").trim() || "Soulfield Product";
+      return { agent:id, output: JSON.stringify(aos.planProduct(title)) };
+    }
+    if(/^\/create-spec\b/i.test(text)) {
+      const name = text.replace(/^\/create-spec\s*/i,"").trim() || "New Feature";
+      return { agent:id, output: JSON.stringify(aos.createSpec(name)) };
+    }
+    if(/^\/execute-tasks\b/i.test(text)) {
+      const name = text.replace(/^\/execute-tasks\s*/i,"").trim() || "New Feature";
+      return { agent:id, output: JSON.stringify(aos.executeTasks(name)) };
+    }
+    // fallback: language help (offline message)
+    const out = await callClaude(agent.system, text);
+    return { agent:id, output: out };
+  }
+
+  if(id === "mcp"){
+    return { agent:id, output: JSON.stringify({ error:"MCP JSON bridge not wired in offline mode" }) };
+  }
+
+  // default aiden
+  const out = await callClaude(agent.system, text);
+  return { agent:id, output: out };
+}
+
+module.exports = { runWithCouncil };

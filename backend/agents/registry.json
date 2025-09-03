@@ -1,0 +1,30 @@
+{
+  "aiden": {
+    "title": "Aiden (Claude Opus 4.1)",
+    "desc": "Reasoning, planning, drafting; converts briefs into research/specs.",
+    "inputs": ["brief", "context"],
+    "zones": ["research","specs","knowledge"],
+    "safe": true
+  },
+  "infranodus": {
+    "title": "InfraNodus Gap Analyzer",
+    "desc": "Text network analysis to surface content gaps and clusters.",
+    "inputs": ["topic", "texts[]"],
+    "zones": ["research","data/infranodus"],
+    "safe": true
+  },
+  "jina": {
+    "title": "Jina Retrieval/Rerank",
+    "desc": "Semantic search or rerank across workspace docs.",
+    "inputs": ["query"],
+    "zones": ["knowledge","research","specs"],
+    "safe": true
+  },
+  "scraper": {
+    "title": "Policy-first Scraper (Bright Data)",
+    "desc": "Fetch HTML/JSON behind allowlist+logs; saves to data/scrapes/*.jsonl",
+    "inputs": ["url"],
+    "zones": ["data/scrapes"],
+    "safe": true
+  }
+}

@@ -1,0 +1,7 @@
+const path = require("path");
+const jina = require(path.resolve(__dirname, "../../adapters/jina/index.cjs"));
+async function run({ query, brief }) {
+  const q = query || brief || "";
+  return jina.search({ query: q });
+}
+module.exports = { run };

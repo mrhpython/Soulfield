@@ -1,0 +1,50 @@
+[
+  {
+    "keyword": "bright data scraping browser",
+    "intent": "research",
+    "difficulty": "medium",
+    "volume_est": 500
+  },
+  {
+    "keyword": "web scraping api uk",
+    "intent": "commercial",
+    "difficulty": "high",
+    "volume_est": 1200
+  },
+  {
+    "keyword": "compliant web scraping",
+    "intent": "informational",
+    "difficulty": "low",
+    "volume_est": 300
+  },
+  {
+    "keyword": "headless browser api",
+    "intent": "technical",
+    "difficulty": "medium",
+    "volume_est": 2000
+  },
+  {
+    "keyword": "puppeteer alternative",
+    "intent": "comparison",
+    "difficulty": "medium",
+    "volume_est": 3500
+  },
+  {
+    "keyword": "gdpr web scraping",
+    "intent": "compliance",
+    "difficulty": "high",
+    "volume_est": 800
+  },
+  {
+    "keyword": "automated data collection uk",
+    "intent": "commercial",
+    "difficulty": "high",
+    "volume_est": 400
+  },
+  {
+    "keyword": "jsonl data export",
+    "intent": "technical",
+    "difficulty": "low",
+    "volume_est": 150
+  }
+]

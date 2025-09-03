@@ -1,0 +1,22 @@
+# run @ 2025-09-03T00:42:57.949Z  (cwd:/home/michael/soulfield-Copy/backend)
+$ echo "hello from spec"
+hello from spec
+$ ls -1
+adapters
+agents
+council.js
+data
+index.cjs
+jobs.js
+mcp-server.cjs
+services
+tests
+truthlens.cjs
+truthLens.js
+tui.js
+$ head -n 5 ../README.md
+# Soulfield OS
+
+A backend‑first agent OS for research → gap analysis → spec → (safe) execution. It exposes a minimal HTTP API, a read‑only MCP filesystem tool, a terminal spec browser, and adapters for Claude (Aiden), Jina rerank, InfraNodus gap analysis, and a policy‑first scraper.
+
+## Features

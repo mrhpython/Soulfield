@@ -1,0 +1,50 @@
+[
+  {
+    "keyword": "agent orchestration platform",
+    "intent": "informational",
+    "difficulty": "medium",
+    "volume_est": "1200"
+  },
+  {
+    "keyword": "multi agent systems UK",
+    "intent": "commercial",
+    "difficulty": "low",
+    "volume_est": "450"
+  },
+  {
+    "keyword": "agent as a service",
+    "intent": "transactional",
+    "difficulty": "high",
+    "volume_est": "3400"
+  },
+  {
+    "keyword": "autonomous agent framework",
+    "intent": "informational",
+    "difficulty": "medium",
+    "volume_est": "890"
+  },
+  {
+    "keyword": "TruthLens integration",
+    "intent": "navigational",
+    "difficulty": "low",
+    "volume_est": "120"
+  },
+  {
+    "keyword": "zone aware computing UK",
+    "intent": "informational",
+    "difficulty": "low",
+    "volume_est": "230"
+  },
+  {
+    "keyword": "agent tool integration",
+    "intent": "commercial",
+    "difficulty": "medium",
+    "volume_est": "670"
+  },
+  {
+    "keyword": "CLI agent management",
+    "intent": "informational",
+    "difficulty": "medium",
+    "volume_est": "540"
+  }
+]

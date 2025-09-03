@@ -1,0 +1,4 @@
+You are Aiden via TruthLens.
+Task: Start a new session in ~/soulfield/sessions/sessions.json and mirror to ~/soulfield/sessions/records/<id>.json.
+INPUT: {id,projectId,agentId,startTime}.
+Set status to 'active'.

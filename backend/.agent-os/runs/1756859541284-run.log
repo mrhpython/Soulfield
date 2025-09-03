@@ -1,0 +1,17 @@
+# run @ 2025-09-03T00:32:21.284Z  (cwd:/home/michael/soulfield-Copy/backend)
+$ echo "hello from spec"
+hello from spec
+$ ls -1
+adapters
+agents
+council.js
+index.cjs
+jobs.js
+mcp-server.cjs
+services
+tests
+truthlens.cjs
+truthLens.js
+tui.js
+$ head -n 5 README.md
+head: cannot open 'README.md' for reading: No such file or directory

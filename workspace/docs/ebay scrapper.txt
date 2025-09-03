@@ -1,0 +1,261 @@
+Thought for 15s
+
+Love it—let’s ship an eBay “undervalued deals” finder that works even if Bright Data blocks you for now, and then we’ll plug Bright Data back in as an optional booster.
+
+Below is a clean, TruthLens‑friendly plan plus copy‑paste commands and tiny Node modules that slot straight into your Soulfield OS.
+
+Plan (practical + incremental)
+
+Goal: find live eBay UK listings priced significantly below fair value (based on 30‑day sold comps), and save a ranked list to workspace/data/deals/*.jsonl + CSV for quick action.
+
+Track A — Official eBay APIs (works today, no Bright Data)
+
+Baseline price: use Finding API – findCompletedItems (no OAuth, AppID only) to fetch sold items for the query (UK site).
+
+Live inventory: use Finding API – findItemsByKeywords (or Browse API if you prefer OAuth).
+
+Undervaluation: compute median/iqr (or z‑score) from sold comps; flag live items at, e.g., ≤ median − 1.0×IQR (tuneable).
+
+TruthLens: store raw comps + live listings + scoring config + timestamp; every result is reproducible.
+
+Track B — Bright Data (optional, add later)
+
+Swap our live inventory step to Bright Data’s eBay by keyword template for deeper fields and anti‑bot resilience.
+
+Keep everything else identical (normalizer → scorer → CSV).
+
+Track C — Intelligence loop
+
+Send the saved JSONL to InfraNodus to cluster brands/models; pipe clusters into Aiden to propose “focused flips” and procurement sources (UK/EU/China) with risk notes.
+
+Use Jina rerank when queries are broad (“gaming laptop”, “car polisher”) to surface the best sub‑niches.
+
+One‑time setup (eBay keys + env)
+
+Create an eBay developer key and note your AppID (a.k.a. “Client ID”).
+
+Add to ~/.env:
+
+cat >> ~/.env <<'ENV'
+EBAY_APP_ID=YOUR_EBAY_APP_ID
+EBAY_GLOBAL_ID=EBAY-GB   # UK site
+ENV
+
+
+Reload your shell: source ~/.profile 2>/dev/null || true; source ~/.bashrc 2>/dev/null || true
+
+Drop-in modules
+
+Run these blocks in your terminal from ~/soulfield:
+
+1) Normalizer + stats
+mkdir -p backend/services/deals backend/services/ebay workspace/data/deals
+
+cat > backend/services/deals/stats.cjs <<'JS'
+const quantiles = (nums, q) => {
+  const a = nums.slice().sort((x,y)=>x-y);
+  const pos = (a.length-1)*q;
+  const base = Math.floor(pos);
+  const rest = pos - base;
+  if (a[base+1]!==undefined) return a[base]+rest*(a[base+1]-a[base]);
+  return a[base];
+};
+exports.summary = prices => {
+  const clean = prices.filter(x=>Number.isFinite(x) && x>0);
+  if (!clean.length) return {count:0};
+  const median = quantiles(clean, 0.5);
+  const q1 = quantiles(clean, 0.25);
+  const q3 = quantiles(clean, 0.75);
+  const iqr = q3 - q1 || 1;
+  const mean = clean.reduce((a,b)=>a+b,0)/clean.length;
+  return {count:clean.length, mean, median, q1, q3, iqr};
+};
+exports.score = (price, {median, iqr}) => {
+  if (!median || !iqr) return 0;
+  return (median - price) / iqr; // >1.0 means ≥1 IQR under median
+};
+JS
+
+2) eBay Finding API client (sold comps + live search)
+cat > backend/services/ebay/finding.cjs <<'JS'
+const fetch = (...a)=>import('node-fetch').then(({default:f})=>f(...a));
+const BASE = 'https://svcs.ebay.com/services/search/FindingService/v1';
+const APPID = process.env.EBAY_APP_ID;
+const GLOBAL_ID = process.env.EBAY_GLOBAL_ID || 'EBAY-GB';
+
+async function call(op, params) {
+  const url = new URL(BASE);
+  url.searchParams.set('OPERATION-NAME', op);
+  url.searchParams.set('SERVICE-VERSION','1.13.0');
+  url.searchParams.set('SECURITY-APPNAME', APPID);
+  url.searchParams.set('RESPONSE-DATA-FORMAT','JSON');
+  url.searchParams.set('REST-PAYLOAD','');
+  for (const [k,v] of Object.entries(params||{})) url.searchParams.set(k,v);
+  const r = await fetch(url.toString(), {headers:{'X-EBAY-SOA-GLOBAL-ID': GLOBAL_ID}});
+  if (!r.ok) throw new Error(`eBay ${op} HTTP ${r.status}`);
+  const j = await r.json();
+  return j;
+}
+function parseItems(rootKey, j) {
+  const arr = (((j||{})[rootKey]||[])[0]||{}).searchResult?.[0]?.item || [];
+  return arr.map(x=>({
+    id: x.itemId?.[0],
+    title: x.title?.[0],
+    price: Number(x.sellingStatus?.[0]?.currentPrice?.[0]?.__value__) || Number(x.sellingStatus?.[0]?.convertedCurrentPrice?.[0]?.__value__),
+    currency: x.sellingStatus?.[0]?.currentPrice?.[0]?.['@currencyId'] || 'GBP',
+    condition: x.condition?.[0]?.conditionDisplayName?.[0],
+    url: x.viewItemURL?.[0],
+    location: x.location?.[0],
+    category: x.primaryCategory?.[0]?.categoryName?.[0],
+    endTime: x.listingInfo?.[0]?.endTime?.[0],
+    gallery: x.galleryURL?.[0] || x.galleryPlusPictureURL?.[0],
+    seller: x.sellerInfo?.[0]?.sellerUserName?.[0]
+  }));
+}
+
+// SOLD comps within last 30 days
+exports.findCompleted = async (keywords, extra={}) => {
+  const j = await call('findCompletedItems', {
+    keywords,
+    'itemFilter(0).name': 'SoldItemsOnly',
+    'itemFilter(0).value': 'true',
+    'itemFilter(1).name': 'Condition',
+    'itemFilter(1).value': extra.condition || 'Used',
+    'paginationInput.entriesPerPage': extra.limit || 100
+  });
+  return parseItems('findCompletedItemsResponse', j);
+};
+
+// Live listings now
+exports.findLive = async (keywords, extra={}) => {
+  const j = await call('findItemsByKeywords', {
+    keywords,
+    'itemFilter(0).name': 'Condition',
+    'itemFilter(0).value': extra.condition || 'Used',
+    'sortOrder': 'BestMatch',
+    'paginationInput.entriesPerPage': extra.limit || 100
+  });
+  return parseItems('findItemsByKeywordsResponse', j);
+};
+JS
+
+3) Deals finder (scoring + saving)
+cat > backend/services/deals/find-ebay-deals.cjs <<'JS'
+const fs = require('fs');
+const path = require('path');
+const {findCompleted, findLive} = require('../ebay/finding.cjs');
+const stats = require('./stats.cjs');
+
+function ensureDir(p){ fs.mkdirSync(p, {recursive:true}); }
+
+async function run(query, opts={}) {
+  const outDir = path.resolve(process.env.HOME, 'soulfield/workspace/data/deals');
+  ensureDir(outDir);
+  const stamp = Date.now();
+
+  // 1) comps
+  const comps = await findCompleted(query, {limit: 150});
+  const compPrices = comps.map(x=>x.price).filter(Number.isFinite);
+  const summary = stats.summary(compPrices);
+
+  // 2) live listings
+  const live = await findLive(query, {limit: 120});
+
+  // 3) score
+  const thresholdIQR = Number(opts.thresholdIQR ?? 1.0);
+  const scored = live.map(x=>{
+    const s = stats.score(x.price, summary);
+    return {...x, score: s};
+  }).sort((a,b)=>b.score-a.score);
+
+  const winners = scored.filter(x=>x.score >= thresholdIQR);
+
+  const record = {
+    query, stamp,
+    summary,
+    winners, // undervalued
+    sample: scored.slice(0,30),
+    comps: comps.slice(0,100)
+  };
+
+  const jsonlFile = path.join(outDir, `${stamp}-ebay-deals-${query.replace(/\s+/g,'-').toLowerCase()}.jsonl`);
+  fs.writeFileSync(jsonlFile, JSON.stringify(record) + '\n');
+
+  // CSV quick view
+  const csvFile = jsonlFile.replace(/\.jsonl$/, '.csv');
+  const toCsv = winners.map(w=>[
+    JSON.stringify(w.title||''),
+    w.price,
+    summary.median,
+    (summary.median - w.price).toFixed(2),
+    w.score.toFixed(2),
+    w.url
+  ].join(',')).join('\n');
+  fs.writeFileSync(csvFile, 'title,price,median,discount,score,url\n'+toCsv);
+
+  return {jsonlFile, csvFile, summary, winnersCount: winners.length};
+}
+
+// CLI
+if (require.main === module) {
+  const [,, ...args] = process.argv;
+  const query = args.join(' ').trim();
+  if (!query) { console.error('Usage: node find-ebay-deals.cjs "<search terms>"'); process.exit(2); }
+  run(query).then(r=>{ console.log(r); }).catch(e=>{ console.error(e); process.exit(1); });
+}
+
+module.exports = run;
+JS
+
+4) Nice CLI wrapper
+cat >> ~/.bin/sf <<'BASH'
+deals() { node "$HOME/soulfield/backend/services/deals/find-ebay-deals.cjs" "$@"; }
+case "$1" in
+  deals) shift; deals "$@"; exit $? ;;
+esac
+BASH
+chmod +x ~/.bin/sf; hash -r 2>/dev/null || true
+
+Try it
+# Example niches
+sf deals "makita cordless drill"
+sf deals "iphone 13 128gb"
+sf deals "car polisher da"
+sf deals "nintendo switch oled"
+
+# See output
+ls -lt ~/soulfield/workspace/data/deals | head
+column -s, -t ~/soulfield/workspace/data/deals/*-ebay-deals-*.csv | head -n 30
+
+
+You’ll get:
+
+CSV: quick list of undervalued items (title, price, median, discount, score, URL)
+
+JSONL: full record (summary + winners + comp sample) for TruthLens & later analysis.
+
+(Optional) Send to InfraNodus & Aiden
+infra import json ~/soulfield/workspace/data/deals deals
+sf research "From latest eBay deals records, cluster top brands/models with strong discount and supply sources (UK/EU/China). Output a one-week flip plan with risks."
+sf specify <research-id>
+sf dry
+sf apply --apply
+
+When Bright Data is ready again
+
+Keep the above; then add a Bright Data handler that returns the same shape {id,title,price,url,...} for live listings. Swap findLive() to the BD version via a flag:
+
+sf deals "iphone 13 128gb" --live=brightdata
+
+
+We already have the policy + allowlist and the scraper agent stub; it’ll drop straight in.
+
+Notes & tips
+
+The “undervalued” threshold is under your control. Start with score ≥ 1.0 (≥1 IQR under median) and tweak based on niche.
+
+You can filter obvious pitfalls (spares/repairs, cracked screens) by adding a title filter list; easy to extend in find-ebay-deals.cjs.
+
+To restrict to BIN or Used only, add more itemFilters in finding.cjs.
+
+If you want me to add BIN‑only, condition filters, or an Etsy/Amazon variant next, say the word and I’ll drop in the snippets.

@@ -1,0 +1,152 @@
+
+/**
+ * Pinecone-backed memory for Soulfield OS
+ * Exports: ensureIndex, upsertDocs(docs), query({text,topK,filter})
+ *
+ * ENV (set in ~/.env):
+ *   USE_PINECONE=1
+ *   PINECONE_API_KEY=...
+ *   PINECONE_INDEX=soulfield-memory
+ *   PINECONE_CLOUD=aws
+ *   PINECONE_REGION=us-east-1
+ *   EMBED_PROVIDER=openai   # or 'jina'
+ *   OPENAI_API_KEY=...      # if EMBED_PROVIDER=openai
+ *   JINA_API_KEY=...        # if EMBED_PROVIDER=jina
+ */
+
+const { Pinecone } = require('@pinecone-database/pinecone');
+
+const INDEX   = process.env.PINECONE_INDEX  || 'soulfield-memory';
+const CLOUD   = process.env.PINECONE_CLOUD  || 'aws';
+const REGION  = process.env.PINECONE_REGION || 'us-east-1';
+const PROVIDER= (process.env.EMBED_PROVIDER || 'openai').toLowerCase();
+
+const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY });
+
+/** Ensure index exists (serverless), then return a handle */
+async function ensureIndex() {
+  // List and check
+  const { indexes } = await pc.listIndexes();
+  const exists = (indexes || []).some(i => i.name === INDEX);
+
+  // Embedding dimension per provider
+  const DIM = (PROVIDER === 'jina') ? 1024 : 1536; // jina-v2-base-en ≈1024, OpenAI t-e-3-small = 1536
+
+  if (!exists) {
+    await pc.createIndex({
+      name: INDEX,
+      dimension: DIM,
+      metric: 'cosine',
+      spec: { serverless: { cloud: CLOUD, region: REGION } }
+    });
+
+    // wait until ready
+    for (let i = 0; i < 30; i++) {
+      const d = await pc.describeIndex(INDEX);
+      if (d?.status?.ready) break;
+      await new Promise(r => setTimeout(r, 2000));
+    }
+  }
+
+  return pc.index(INDEX);
+}
+
+/** Simple chunker to keep metadata and long docs manageable */
+function* chunkText(doc, maxLen = 1000) {
+  const { id, text, meta = {} } = doc;
+  if (!text) return;
+  for (let c = 0, i = 0; i < text.length; i += maxLen, c++) {
+    yield {
+      id: `${id}:${c}`,
+      text: text.slice(i, i + maxLen),
+      meta: { ...meta, doc_id: id, chunk: c }
+    };
+  }
+}
+
+/** Embed via OpenAI (t-e-3-small) or Jina (v2-base-en) */
+async function embedBatch(texts = []) {
+  if (!texts.length) return [];
+  if (PROVIDER === 'openai') {
+    const res = await fetch('https://api.openai.com/v1/embeddings', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'text-embedding-3-small',
+        input: texts
+      })
+    });
+    if (!res.ok) throw new Error(`OpenAI embed failed: ${res.status} ${await res.text()}`);
+    const data = await res.json();
+    return data.data.map(d => d.embedding);
+  } else if (PROVIDER === 'jina') {
+    const res = await fetch('https://api.jina.ai/v1/embeddings', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.JINA_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'jina-embeddings-v2-base-en',
+        input: texts
+      })
+    });
+    if (!res.ok) throw new Error(`Jina embed failed: ${res.status} ${await res.text()}`);
+    const data = await res.json();
+    return data.data.map(d => d.embedding);
+  } else {
+    throw new Error(`Unknown EMBED_PROVIDER: ${PROVIDER}`);
+  }
+}
+
+/** Upsert an array of docs: [{id, text, meta?}] */
+async function upsertDocs(docs = []) {
+  if (!Array.isArray(docs)) throw new Error('upsertDocs expects an array of {id,text,meta?}');
+  const idx = await ensureIndex();
+
+  // chunk -> embed -> upsert (batched)
+  const chunks = [];
+  for (const d of docs) for (const ch of chunkText(d)) chunks.push(ch);
+
+  const BATCH = 64;
+  for (let i = 0; i < chunks.length; i += BATCH) {
+    const slice = chunks.slice(i, i + BATCH);
+    const vecs = await embedBatch(slice.map(s => s.text));
+    const vectors = slice.map((s, k) => ({
+      id: s.id,
+      values: vecs[k],
+      metadata: s.meta
+    }));
+    await idx.upsert(vectors);
+  }
+  return { ok: true, upserted: chunks.length };
+}
+
+/** Query nearest chunks */
+async function query({ text, topK = 5, filter } = {}) {
+  if (!text) throw new Error('query requires {text}');
+  const idx = await ensureIndex();
+  const [vec] = await embedBatch([text]);
+
+  const res = await idx.query({
+    vector: vec,
+    topK,
+    includeMetadata: true,
+    filter
+  });
+
+  return {
+    ok: true,
+    matches: (res.matches || []).map(m => ({
+      id: m.id,
+      score: m.score,
+      meta: m.metadata
+    }))
+  };
+}
+
+module.exports = { ensureIndex, upsertDocs, query };
+
