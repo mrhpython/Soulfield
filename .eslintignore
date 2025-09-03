@@ -1,0 +1,8 @@
+node_modules/
+archive/
+receipts/
+workspace/
+**/.agent-os/**
+**/.venv/**
+**/__pycache__/**
+

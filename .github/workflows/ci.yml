@@ -27,6 +27,8 @@ jobs:
           sleep 1
           curl -fsS http://127.0.0.1:8790/health | tee health.json
           kill $(cat api.pid)
+      - name: Run ESLint (npx)
+        run: npx -y eslint .
       - name: Lint (if present)
         run: npm run -s lint --if-present
       - name: Test (if present)

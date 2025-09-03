@@ -8,7 +8,7 @@
     "start:tui": "node backend/tui.js",
     "test:apply": "node backend/tests/test-apply.js --dry",
     "test:apply:run": "node backend/tests/test-apply.js --apply",
-    "test": "echo \"No unit tests; try npm run test:apply\" && exit 0"
+    "test": "node backend/tests/chat-smoke.cjs"
   },
   "keywords": [],
   "author": "",
