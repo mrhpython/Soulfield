@@ -1,6 +1,4 @@
 fastapi
 uvicorn
 requests
-fastapi
-uvicorn
-
+httpx

@@ -29,8 +29,8 @@ jobs:
             sleep 0.3
           done
           kill $(cat api.pid)
-      - name: Run ESLint (npx)
-        run: npx -y eslint .
+      - name: Run ESLint (npx ESLint v8)
+        run: npx -y eslint@8 .
       - name: Lint (if present)
         run: npm run -s lint --if-present
       - name: Test (if present)
