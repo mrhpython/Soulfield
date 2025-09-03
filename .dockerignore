@@ -1,0 +1,23 @@
+# Secrets / config
+.env
+.env.*
+receipts/
+
+# VCS
+.git
+
+# Dependencies / caches
+node_modules/
+.venv/
+__pycache__/
+
+# Runtime data
+data/
+sessions/
+workspace/data/
+backend/.agent-os/runs/
+
+# OS/editor cruft
+.DS_Store
+*.log
+

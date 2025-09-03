@@ -20,6 +20,13 @@ jobs:
           cache: 'npm'
       - name: Install
         run: npm ci
+      - name: API health (offline)
+        run: |
+          DEV_NO_API=1 node backend/index.cjs &
+          echo $! > api.pid
+          sleep 1
+          curl -fsS http://127.0.0.1:8790/health | tee health.json
+          kill $(cat api.pid)
       - name: Lint (if present)
         run: npm run -s lint --if-present
       - name: Test (if present)
@@ -49,4 +56,3 @@ jobs:
           else
             echo "No python tests found; skipping"
           fi
-
