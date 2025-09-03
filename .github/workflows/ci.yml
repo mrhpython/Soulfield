@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  node:
+    if: ${{ hashFiles('package.json') != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install
+        run: npm ci
+      - name: API health (offline)
+        run: |
+          DEV_NO_API=1 node backend/index.cjs &
+          echo $! > api.pid
+          sleep 1
+          curl -fsS http://127.0.0.1:8790/health | tee health.json
+          kill $(cat api.pid)
+      - name: Lint (if present)
+        run: npm run -s lint --if-present
+      - name: Test (if present)
+        run: npm run -s test --if-present
+
+  python:
+    if: ${{ hashFiles('requirements.txt') != '' || hashFiles('pyproject.toml') != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps (if requirements.txt)
+        run: |
+          if [ -f requirements.txt ]; then
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+          fi
+      - name: Run pytest if tests are present
+        run: |
+          if ls -1 tests test_*.py 2>/dev/null | grep -q .; then
+            pip install pytest
+            pytest -q
+          else
+            echo "No python tests found; skipping"
+          fi
