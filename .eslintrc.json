@@ -1,0 +1,26 @@
+{
+  "root": true,
+  "env": { "es2021": true, "node": true },
+  "parserOptions": { "ecmaVersion": 2021 },
+  "extends": ["eslint:recommended"],
+  "ignorePatterns": [
+    "node_modules/**",
+    "archive/**",
+    "receipts/**",
+    "workspace/**",
+    "**/.agent-os/**",
+    "**/.venv/**",
+    "**/__pycache__/**"
+  ],
+  "overrides": [
+    {
+      "files": ["backend/**/*.cjs", "tools/**/*.cjs"],
+      "rules": {
+        "no-undef": "off",
+        "no-unused-vars": ["warn", { "args": "none", "ignoreRestSiblings": true }],
+        "no-console": "off"
+      }
+    }
+  ]
+}
+
